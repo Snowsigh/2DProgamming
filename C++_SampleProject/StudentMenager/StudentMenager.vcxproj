@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{1df628da-2151-487c-90e1-f252ae396f5c}</ProjectGuid>
-    <RootNamespace>CSampleProject</RootNamespace>
+    <ProjectGuid>{8f476321-c810-4a47-b4ee-7bdb756c7069}</ProjectGuid>
+    <RootNamespace>StudentMenager</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -72,16 +72,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>../../OutPut</OutDir>
-    <IntDir>../../Output/SampleProejct</IntDir>
+    <OutDir>../../Output</OutDir>
+    <IntDir>../../Output/Student</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>../Output</OutDir>
-    <IntDir>../Output/SampleProejct</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -143,7 +141,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="C++_Sample.cpp" />
+    <ClCompile Include="KLinkedList.cpp" />
+    <ClCompile Include="KMain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="KLinkedList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
