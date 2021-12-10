@@ -2,13 +2,15 @@
 #include <iostream>
 #include <list>
 #include <map>
+#include <Windows.h>
 struct KStudent
 {
 	std::string STRname;
 	std::string STRaddress;
 	std::string STRnumber;
-	std::map <std::string, int> MAPsexual;
-
+	std::map <std::string, int> MAPrecord;
+	int iSubJect = 0;
+	
 };
 class KNode
 {
@@ -31,10 +33,16 @@ class KLinkedList
 {
 public:
 	void Init(int ivalue);
+	void run();
+	
 	void Remove(std::string NameValue = "전체삭제");
 	void Draw();
+	void Select();
+
+	void fileInput();
+	void fileOutput();
 private:
-	void AddList(std::string _STR, int _int);
+	void AddList();
 
 public:
 	KNode* m_RootNode;
