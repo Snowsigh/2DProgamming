@@ -1,17 +1,24 @@
 #pragma once
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <iostream>
 #include <list>
 #include <map>
 #include <Windows.h>
+#include <fstream>
+#include <string.h>
+
 struct KStudent
 {
+public:
 	std::string STRname;
 	std::string STRaddress;
 	std::string STRnumber;
-	std::map <std::string, int> MAPrecord;
 	int iSubJect = 0;
+	std::multimap<const char*, int > mapSubject;
 	
 };
+
 class KNode
 {
 public:
@@ -21,8 +28,13 @@ public:
 	KNode()
 	{
 		m_KTail = nullptr;
-
 	}
+	~KNode()
+	{
+		if (m_KTail != nullptr)
+			delete m_KTail; m_KTail = nullptr;
+	}
+
 
 
 private:
@@ -46,6 +58,7 @@ private:
 
 public:
 	KNode* m_RootNode;
+
 	int iTotalCount = 0;
 	KLinkedList()
 	{

@@ -50,6 +50,7 @@ void KLinkedList::run()
 			fileOutput();
 			break;
 		case 5:
+			
 			fileInput();
 			break;
 		case 6:
@@ -116,20 +117,34 @@ void KLinkedList::AddList()
 					break;
 				}
 			}
+			
+
 			for (int iSub = 0; iSub < m_kNode->m_Student.iSubJect; iSub++)
 			{
 				std::cout << "===============과목과 점수를 입력하여주세요===============" << std::endl;
 				std::cin >> STRsupject >> iPoint;
-				m_kNode->m_Student.MAPrecord.insert(make_pair(STRsupject, iPoint));
+
+				if (iPoint == false)
+				{
+					std::cout << "===============점수가 이상합니다, 0점으로 기입합니다===============" << std::endl;
+					iPoint = 0;
+				}
+
+				std::string* STRtmp = new std::string(STRsupject.c_str());
+				m_kNode->m_Student.mapSubject.insert(std::make_pair(STRtmp->c_str(), iPoint));
+				
 			}
 		}//학생성적추가
 		std::cout << "===============모든 정보가 등록되었습니다===============" << std::endl;
 		std::cout << m_kNode->m_Student.STRname << "  " << m_kNode->m_Student.STRaddress << "  " << m_kNode->m_Student.STRnumber << std::endl;
 
-		std::map<std::string, int>::iterator iter= m_kNode->m_Student.MAPrecord.begin();
-		for (; iter != m_kNode->m_Student.MAPrecord.end(); iter++)
+		std::map<const char *, int>::iterator iter;
+		iter = m_kNode->m_Student.mapSubject.begin();
+
+		for (int iSub = 0; iSub < m_kNode->m_Student.iSubJect; iSub++)
 		{
 			std::cout  << iter->first << "  " << iter->second << std::endl;
+			iter++;
 		}
 		std::cout << "===============해당 정보로 등록되었습니다===============" << std::endl;
 		std::cout << std::endl;
@@ -144,6 +159,7 @@ void KLinkedList::AddList()
 		m_LastTail = m_LastTail->m_KTail;
 
 		KNode* m_kNode = new KNode;
+
 		{
 			std::cout << "===============학생정보를 등록하겠습니다===============" << std::endl;
 			std::string STRname;
@@ -179,6 +195,7 @@ void KLinkedList::AddList()
 				}
 				else
 				{
+					
 					break;
 				}
 			}
@@ -188,22 +205,32 @@ void KLinkedList::AddList()
 				std::cout << "===============과목과 점수를 입력하여주세요===============" << std::endl;
 				
 				std::cin >> STRsupject >> iPoint;
+
 				if (iPoint == false)
 				{
 					std::cout << "===============점수가 이상합니다, 0점으로 기입합니다===============" << std::endl;
 					iPoint = 0;
 				}
-				m_kNode->m_Student.MAPrecord.insert(make_pair(STRsupject, iPoint));
+
+				std::string* STRtmp = new std::string(STRsupject.c_str());
+				m_kNode->m_Student.mapSubject.insert(std::make_pair(STRtmp->c_str(), iPoint));
+
+				
+				
 			}
 		}//학생성적추가
 		std::cout << "===============모든 정보가 등록되었습니다===============" << std::endl;
 		std::cout << m_kNode->m_Student.STRname << "  " << m_kNode->m_Student.STRaddress << "  " << m_kNode->m_Student.STRnumber << std::endl;
 
-		std::map<std::string, int>::iterator iter = m_kNode->m_Student.MAPrecord.begin();
-		for (; iter != m_kNode->m_Student.MAPrecord.end(); iter++)
+		std::map<const char *, int>::iterator iter;
+		iter = m_kNode->m_Student.mapSubject.begin();
+
+		for (int iSub = 0; iSub < m_kNode->m_Student.iSubJect; iSub++)
 		{
-			std::cout << iter->first << "  " << iter->second << std::endl;;
+			std::cout << iter->first << "  " << iter->second << std::endl;
+			iter++;
 		}
+
 		std::cout << "===============해당 정보로 등록되었습니다===============" << std::endl;
 		std::cout << std::endl;
 
@@ -293,11 +320,17 @@ void KLinkedList::Draw()
 	{
 		std::cout << "==============="<< tmp->m_Student.STRname << " 학생 정보============== = " << std::endl;
 		std::cout << tmp->m_Student.STRname << "  " << tmp->m_Student.STRaddress << "  " << tmp->m_Student.STRnumber << std::endl;
-		std::map<std::string, int>::iterator iter = tmp->m_Student.MAPrecord.begin();
-		for (; iter != tmp->m_Student.MAPrecord.end(); iter++)
+		
+
+		std::map<const char *, int>::iterator iter;
+		iter = tmp->m_Student.mapSubject.begin();
+
+		for (int iSub = 0; iSub < tmp->m_Student.iSubJect; iSub++)
 		{
 			std::cout << iter->first << "  " << iter->second << std::endl;
+			iter++;
 		}
+
 
 		tmp = tmp->m_KTail;
 	}
@@ -331,10 +364,15 @@ void KLinkedList::Select()
 	{
 		std::cout << "===============" << tmp->m_Student.STRname << " 학생 정보============== = " << std::endl;
 		std::cout << tmp->m_Student.STRname << "  " << tmp->m_Student.STRaddress << "  " << tmp->m_Student.STRnumber << std::endl;
-		std::map<std::string, int>::iterator iter = tmp->m_Student.MAPrecord.begin();
-		for (; iter != tmp->m_Student.MAPrecord.end(); iter++)
+	
+
+		std::map<const char*, int>::iterator iter;
+		iter = tmp->m_Student.mapSubject.begin();
+
+		for (int iSub = 0; iSub < tmp->m_Student.iSubJect; iSub++)
 		{
 			std::cout << iter->first << "  " << iter->second << std::endl;
+			iter++;
 		}
 
 		std::string STRtmp;
@@ -362,15 +400,16 @@ void KLinkedList::Select()
 }
 void KLinkedList::fileInput()
 {
+	m_RootNode = new KNode;
 	std::cout << "===============파일을 불러옵니다===============" << std::endl;
 	std::cout << "***************모든 데이터가 삭제되고 불러옵니다***************" << std::endl;
 	Remove();
 
 	FILE* fp;
-
-	m_RootNode = new KNode;
+	
 	KNode* tmp = m_RootNode;
 
+	
 	
 
 	fopen_s(&fp,"StudentData.txt", "rb");
@@ -378,58 +417,97 @@ void KLinkedList::fileInput()
 	if (fp == NULL)
 	{
 		std::cout << "===============파일을 불러올수 없습니다===============" << std::endl;
+		fclose(fp);
+		
 		return;
 	}
+
 	fread(&iTotalCount, sizeof(int), 1, fp);
+	
 
 	for (int iNode = 0; iNode < iTotalCount; iNode++)
 	{
 		tmp->m_KTail = new KNode;
-		fread(tmp->m_KTail, sizeof(KNode), 1, fp);
+		char* STRtmp = nullptr;
+		int itmp;
+
+		fread(&tmp->m_KTail->m_Student.STRname, sizeof(std::string), 1, fp);
+		fread(&tmp->m_KTail->m_Student.STRaddress, sizeof(std::string), 1, fp);
+		fread(&tmp->m_KTail->m_Student.STRnumber, sizeof(std::string), 1, fp);
+		fread(&tmp->m_KTail->m_Student.iSubJect, sizeof(int), 1, fp);
+		
+
 
 		for (int iSub = 0; iSub < tmp->m_KTail->m_Student.iSubJect; iSub++)
-		{		
+		{
+			fread(STRtmp, sizeof(char), 1, fp);
+			fread(&itmp, sizeof(int), 1, fp);
 
-			fread(&tmp->m_KTail->m_Student.MAPrecord, sizeof(std::map<std::string,int>), 1, fp); // 불러오기 안됨, 메모리 에러뜸, 저장방식을 바꿔야함
-
+			//tmp->m_KTail->m_Student.mapSubject.insert(std::make_pair(STRtmp, itmp));
 		}
-		tmp = tmp->m_KTail;
 
+		tmp = tmp->m_KTail;
+		
+		
 	}
+
+
 	fclose(fp);
-	tmp->m_KTail = m_RootNode;
-	std::cout << "===============불러온 학생 정보 입니다===============" << std::endl;
-	Draw();
 	
+	tmp->m_KTail = m_RootNode;
+
+	
+
+	std::cout << "===============불러온 학생 정보 입니다===============" << std::endl;
+	//Draw();
 }
 void KLinkedList::fileOutput()
 {
 	KNode* tmp = m_RootNode->m_KTail;
 	FILE* fp;
+	
+
 	std::cout << "===============파일을 새로 만듭니다===============" << std::endl;
+
 	fopen_s(&fp,"StudentData.txt", "wb");
 
+	
+
+	
 	fwrite(&iTotalCount, sizeof(int), 1, fp);
 
 	for(int iNode = 0; iNode < iTotalCount; iNode++)
 	{
-		std::map<std::string, int> MAPtmp = tmp->m_Student.MAPrecord;
-		tmp->m_Student.MAPrecord.clear();
-		fwrite(tmp, sizeof(KNode), 1, fp);
 
-		std::map<std::string, int>::iterator iter;
-		iter = MAPtmp.begin();
-		for (int iSub = 0; iSub < tmp->m_Student.iSubJect; iSub++)
+		fwrite(&tmp->m_Student.STRname, sizeof(std::string), 1, fp);
+		fwrite(&tmp->m_Student.STRaddress, sizeof(std::string), 1, fp);
+		fwrite(&tmp->m_Student.STRnumber, sizeof(std::string), 1, fp);
+		fwrite(&tmp->m_Student.iSubJect, sizeof(int), 1, fp);
+
+
+		std::map<const char*, int>::iterator iter;
+		iter = tmp->m_Student.mapSubject.begin();
+
+		for (int iSub = 0; iSub < tmp->m_Student.iSubJect; iSub++) 
 		{
-			fwrite(&iter, sizeof(std::map<std::string, int>), 1, fp); //저장이 문제가 있음 저장방식을 바꿔야함
+			char* STRtmp = nullptr;
+			STRtmp = (char*)iter->first;
+			
+			int itmp = iter->second;
+
+			fwrite(STRtmp, sizeof(char), 1, fp);
+			fwrite(&itmp, sizeof(int), 1, fp);
+
 			iter++;
+			
 		}
-		
 		
 		tmp = tmp->m_KTail;
 	} 
 
 	fclose(fp);
+	
+
 	std::cout << "===============파일을 저장하였습니다===============" << std::endl;
 
 
