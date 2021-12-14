@@ -1,11 +1,4 @@
-#pragma once
-#include <iostream>
-#include <list>
-#include <map>
-#include <Windows.h>
-#include <fstream>
-#include <string.h>
-
+#include "KStd.h"
 struct KInfo
 {
 public:
