@@ -143,11 +143,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="KLinkedList.cpp" />
+    <ClCompile Include="KFileIO.cpp" />
     <ClCompile Include="KMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="KFileIO.h" />
     <ClInclude Include="KLinkedList.h" />
+    <ClInclude Include="KNodes.h" />
+    <ClInclude Include="KStudent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
