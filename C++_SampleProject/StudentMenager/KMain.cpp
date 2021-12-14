@@ -1,19 +1,20 @@
 #include "KLinkedList.h"
 #include "KFileIO.h"
-template <typename KT>
-void run(KT _DataType);
+template <typename KT, typename GT>
+void run(KT _DataType, GT _DataInfoType);
 int main()
 {
 	KNode Knode;
-	run(Knode);
+	run(Knode, Knode.m_Student.info);
 
 	return 0;
 }
-template <typename KT>
-void run<KT>(KT _DataType)
+template <typename KT, typename GT>
+void run<KT>(KT _DataType, GT _DataInfoType)
 {
 	KLinkedList<KT> m_KLinkedList;
-	KFileIO m_IO;
+	KFileIO<KT,GT> m_IO;
+	
 	{
 		bool isRun = true;
 		int istudenttmp = 0;
@@ -61,7 +62,7 @@ void run<KT>(KT _DataType)
 				m_KLinkedList.Select();
 				break;
 			case 4:
-				m_IO.fileOutput(m_KLinkedList.m_RootNode, m_KLinkedList.iTotalCount);
+				m_IO.fileOutput(m_KLinkedList.m_RootNode, m_KLinkedList.iTotalCount, _DataInfoType);
 				break;
 			case 5:
 
@@ -69,7 +70,7 @@ void run<KT>(KT _DataType)
 				std::cout << "===============파일을 불러옵니다===============" << std::endl;
 				std::cout << "***************모든 데이터가 삭제되고 불러옵니다***************" << std::endl;
 				m_KLinkedList.Remove();
-				if ((Nodetmp = m_IO.fileInput()) != nullptr)
+				if ((Nodetmp = m_IO.fileInput(_DataInfoType)) != nullptr)
 				{
 					m_KLinkedList.m_RootNode = Nodetmp;
 					Nodetmp = nullptr;
