@@ -15,8 +15,8 @@ public:
 	std::string STRaddress;
 	std::string STRnumber;
 	int iSubJect = 0;
-	std::multimap<const char*, int > mapSubject;
-	
+	std::multimap<std::string, int > mapSubject;
+	std::string STRtmp;
 };
 
 class KNode

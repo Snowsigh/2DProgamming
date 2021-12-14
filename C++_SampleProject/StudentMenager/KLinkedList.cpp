@@ -130,15 +130,15 @@ void KLinkedList::AddList()
 					iPoint = 0;
 				}
 
-				std::string* STRtmp = new std::string(STRsupject.c_str());
-				m_kNode->m_Student.mapSubject.insert(std::make_pair(STRtmp->c_str(), iPoint));
+				//std::string* STRtmp = new std::string(STRsupject.c_str());
+				m_kNode->m_Student.mapSubject.insert(std::make_pair(STRsupject, iPoint));
 				
 			}
 		}//학생성적추가
 		std::cout << "===============모든 정보가 등록되었습니다===============" << std::endl;
 		std::cout << m_kNode->m_Student.STRname << "  " << m_kNode->m_Student.STRaddress << "  " << m_kNode->m_Student.STRnumber << std::endl;
 
-		std::map<const char *, int>::iterator iter;
+		std::map<std::string, int>::iterator iter;
 		iter = m_kNode->m_Student.mapSubject.begin();
 
 		for (int iSub = 0; iSub < m_kNode->m_Student.iSubJect; iSub++)
@@ -205,15 +205,15 @@ void KLinkedList::AddList()
 				std::cout << "===============과목과 점수를 입력하여주세요===============" << std::endl;
 				
 				std::cin >> STRsupject >> iPoint;
-
+				
 				if (iPoint == false)
 				{
 					std::cout << "===============점수가 이상합니다, 0점으로 기입합니다===============" << std::endl;
 					iPoint = 0;
 				}
 
-				std::string* STRtmp = new std::string(STRsupject.c_str());
-				m_kNode->m_Student.mapSubject.insert(std::make_pair(STRtmp->c_str(), iPoint));
+				//std::string* STRtmp = new std::string(STRsupject.c_str());
+				m_kNode->m_Student.mapSubject.insert(std::make_pair(STRsupject, iPoint));
 
 				
 				
@@ -222,7 +222,7 @@ void KLinkedList::AddList()
 		std::cout << "===============모든 정보가 등록되었습니다===============" << std::endl;
 		std::cout << m_kNode->m_Student.STRname << "  " << m_kNode->m_Student.STRaddress << "  " << m_kNode->m_Student.STRnumber << std::endl;
 
-		std::map<const char *, int>::iterator iter;
+		std::map<std::string, int>::iterator iter;
 		iter = m_kNode->m_Student.mapSubject.begin();
 
 		for (int iSub = 0; iSub < m_kNode->m_Student.iSubJect; iSub++)
@@ -322,7 +322,7 @@ void KLinkedList::Draw()
 		std::cout << tmp->m_Student.STRname << "  " << tmp->m_Student.STRaddress << "  " << tmp->m_Student.STRnumber << std::endl;
 		
 
-		std::map<const char *, int>::iterator iter;
+		std::map<std::string, int>::iterator iter;
 		iter = tmp->m_Student.mapSubject.begin();
 
 		for (int iSub = 0; iSub < tmp->m_Student.iSubJect; iSub++)
@@ -366,7 +366,7 @@ void KLinkedList::Select()
 		std::cout << tmp->m_Student.STRname << "  " << tmp->m_Student.STRaddress << "  " << tmp->m_Student.STRnumber << std::endl;
 	
 
-		std::map<const char*, int>::iterator iter;
+		std::map<std::string, int>::iterator iter;
 		iter = tmp->m_Student.mapSubject.begin();
 
 		for (int iSub = 0; iSub < tmp->m_Student.iSubJect; iSub++)
@@ -428,7 +428,6 @@ void KLinkedList::fileInput()
 	for (int iNode = 0; iNode < iTotalCount; iNode++)
 	{
 		tmp->m_KTail = new KNode;
-		char* STRtmp = nullptr;
 		int itmp;
 
 		fread(&tmp->m_KTail->m_Student.STRname, sizeof(std::string), 1, fp);
@@ -440,10 +439,12 @@ void KLinkedList::fileInput()
 
 		for (int iSub = 0; iSub < tmp->m_KTail->m_Student.iSubJect; iSub++)
 		{
-			fread(STRtmp, sizeof(char), 1, fp);
+			
+
+			fread(&tmp->m_KTail->m_Student.STRtmp, sizeof(std::string), 1, fp); //문제해결완료 : 지역변수, 클래스변수로 받아올경우 데이터 주소값을 잃어버리면서 엑세스 위반 에러
 			fread(&itmp, sizeof(int), 1, fp);
 
-			//tmp->m_KTail->m_Student.mapSubject.insert(std::make_pair(STRtmp, itmp));
+			tmp->m_KTail->m_Student.mapSubject.insert(std::make_pair(tmp->m_KTail->m_Student.STRtmp, itmp));
 		}
 
 		tmp = tmp->m_KTail;
@@ -459,7 +460,7 @@ void KLinkedList::fileInput()
 	
 
 	std::cout << "===============불러온 학생 정보 입니다===============" << std::endl;
-	//Draw();
+	Draw();
 }
 void KLinkedList::fileOutput()
 {
@@ -485,18 +486,14 @@ void KLinkedList::fileOutput()
 		fwrite(&tmp->m_Student.iSubJect, sizeof(int), 1, fp);
 
 
-		std::map<const char*, int>::iterator iter;
+		std::map<std::string, int>::iterator iter;
 		iter = tmp->m_Student.mapSubject.begin();
+		
 
 		for (int iSub = 0; iSub < tmp->m_Student.iSubJect; iSub++) 
 		{
-			char* STRtmp = nullptr;
-			STRtmp = (char*)iter->first;
-			
-			int itmp = iter->second;
-
-			fwrite(STRtmp, sizeof(char), 1, fp);
-			fwrite(&itmp, sizeof(int), 1, fp);
+			fwrite(&iter->first, sizeof(std::string), 1, fp);
+			fwrite(&iter->second, sizeof(int), 1, fp);
 
 			iter++;
 			
