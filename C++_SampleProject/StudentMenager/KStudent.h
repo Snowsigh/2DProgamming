@@ -6,7 +6,8 @@ public:
 	std::string STRaddress;
 	std::string STRnumber;
 };
-
+ 
+ 
 struct KStudent
 {
 public:
