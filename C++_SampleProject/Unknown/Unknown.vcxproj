@@ -145,6 +145,7 @@
     <ClInclude Include="KVector.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="KMain.cpp" />
     <ClCompile Include="KOctree.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

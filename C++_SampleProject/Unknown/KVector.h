@@ -6,14 +6,14 @@ public:
 	float x;
 	float y;
 	float z;
-	KVector3  operator += (KVector3 p)
+	KVector3  operator += (const KVector3 p)
 	{
 		x += p.x;
 		y += p.y;
 		z += p.z;
 		return *this;
 	}
-	KVector3  operator * (float s)
+	KVector3  operator * (const float s)
 	{
 		KVector3 ret;
 		ret.x = x * s;
@@ -21,7 +21,7 @@ public:
 		ret.z = z * s;
 		return ret;
 	}
-	KVector3  operator + (KVector3 p)
+	KVector3  operator + (const KVector3 p)
 	{
 		KVector3 ret;
 		ret.x = x + p.x;
@@ -29,7 +29,7 @@ public:
 		ret.z = z + p.z;
 		return ret;
 	}
-	KVector3  operator - (KVector3 p)
+	KVector3  operator - (const KVector3 p)
 	{
 		KVector3 ret;
 		ret.x = x - p.x;
@@ -37,7 +37,7 @@ public:
 		ret.z = z - p.z;
 		return ret;
 	}
-	KVector3  operator / (float fValue)
+	KVector3  operator / (const float fValue)
 	{
 		KVector3 ret;
 		ret.x = x / fValue;
@@ -45,6 +45,38 @@ public:
 		ret.z = z / fValue;
 		return ret;
 	}
+	bool operator == (KVector3 p)
+	{
+		if (fabs(x - p.x) < 0.001f)
+		{
+			if (fabs(y - p.y) < 0.001f)
+			{
+				if (fabs(z - p.z) < 0.001f)
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	//크기
+	float Length()
+	{
+		float ret = (x * x) + (y * y) + (z * z);
+		return sqrt(ret);
+	}
+	//정규화
+	KVector3 Normalize()
+	{
+		KVector3 vtmp;
+		float length = 1.0f / Length();
+		vtmp.x = vtmp.x * length;
+		vtmp.y = vtmp.y * length;
+		vtmp.z = vtmp.z * length;
+	}
+	
+
 public:
 	KVector3() {}
 	KVector3(float x, float y, float z)

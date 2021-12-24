@@ -26,5 +26,8 @@
     <ClCompile Include="KOctree.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="KMain.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
