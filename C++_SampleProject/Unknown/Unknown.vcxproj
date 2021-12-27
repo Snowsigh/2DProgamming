@@ -24,6 +24,7 @@
     <ProjectGuid>{194a98df-11f5-4579-b00d-80e09637f358}</ProjectGuid>
     <RootNamespace>Unknown</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Octree</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

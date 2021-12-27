@@ -18,7 +18,8 @@ struct KNode
 	int idepth;
 	KNode* m_pParent;
 	KNode* m_pChild[MAXCHILD];
-	std::vector<int> m_ObejctList;
+	std::vector<KCube*> m_ObejctList;
+	int NodeNumber = 0;
 	bool InCube(KVector3 _vPos)
 	{
 		if (m_Cube.vCtrlPoint.x <= _vPos.x && m_Cube.vMaxPoint.x >= _vPos.x &&
@@ -38,6 +39,10 @@ struct KNode
 		m_Cube.vMaxPoint = _vMax;
 		m_Cube.vSize = (_vMax - _vMin) / 2.0f;
 		m_Cube.vCenterPoint = _vMin + m_Cube.vSize;
+		for (int iChild = 0; iChild < MAXCHILD; iChild++)
+		{
+			m_pChild[iChild] = nullptr;
+		}
 
 	}
 };
@@ -47,14 +52,17 @@ class KOctree
 public:
 	KNode* m_pRootNode;
 	int m_ChildNode = MAXCHILD;
+	int NodeCount = 0;
 public:
 	void Init(KVector3 _vMaxCube);
 	KNode* CreateNode(KNode* _pNode, KVector3 _vMin, KVector3 _vMax);
-	void CheckIn();
+	bool CheckIn(KNode* _pNode, KCube _vValue);
 	void BuildTree(KNode* _pNode);
-	void Search();
-	void AddObject();
-	
-	void Release();
+	KNode* Search(KNode* _pNode, KCube _vValue);
+	void AddObject(KVector3 _vMin, KVector3 _vMax);
+
+
+	void Show(KNode* _pNode);
+
 };
 

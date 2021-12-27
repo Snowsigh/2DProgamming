@@ -9,7 +9,9 @@ void KOctree::Init(KVector3 _vMaxCube)
 
 KNode* KOctree::CreateNode(KNode* _pParent, KVector3 _vMin, KVector3 _vMax)
 {
+	NodeCount++;
 	KNode* pNode = new KNode(_vMin, _vMax);
+	pNode->NodeNumber = NodeCount;
 	if (_pParent != nullptr)
 	{
 		pNode->idepth += _pParent->idepth + 1;
@@ -18,8 +20,14 @@ KNode* KOctree::CreateNode(KNode* _pParent, KVector3 _vMin, KVector3 _vMax)
 	return pNode;
 }
 
-void KOctree::CheckIn()
+bool KOctree::CheckIn(KNode* _pNode, KCube _vValue) // 노드안에 속해 있는지 체크
 {
+	if ((_pNode->m_Cube.vCtrlPoint.x <= _vValue.vCtrlPoint.x && _pNode->m_Cube.vCtrlPoint.y <= _vValue.vCtrlPoint.y && _pNode->m_Cube.vCtrlPoint.z <= _vValue.vCtrlPoint.z)
+		&& (_pNode->m_Cube.vMaxPoint.x >= _vValue.vMaxPoint.x && _pNode->m_Cube.vMaxPoint.y >= _vValue.vMaxPoint.y && _pNode->m_Cube.vMaxPoint.z >= _vValue.vMaxPoint.z))
+	{
+		return true;
+	}
+	return false;
 }
 
 void KOctree::BuildTree(KNode* _pNode)
@@ -67,14 +75,55 @@ void KOctree::BuildTree(KNode* _pNode)
 	}
 }
 
-void KOctree::Search()
+KNode* KOctree::Search(KNode* _pNode, KCube _vValue)
 {
+	if (CheckIn(_pNode,_vValue))
+	{
+		for (int iChild = 0; iChild < MAXCHILD; iChild++)
+		{
+			if (_pNode->m_pChild[iChild] != nullptr)
+			{
+				KNode* tmp;
+				tmp = Search(_pNode->m_pChild[iChild], _vValue);
+				if (tmp != nullptr)
+					return tmp;
+			}
+		}
+		return _pNode;
+	}
+	return nullptr;
 }
 
-void KOctree::AddObject()
+void KOctree::AddObject(KVector3 _vMin, KVector3 _vMax)
 {
+	
+		KCube* m_pCube = new KCube;
+		m_pCube->vCtrlPoint = _vMin;
+		m_pCube->vMaxPoint = _vMax;
+		m_pCube->vSize = (_vMax - _vMin) / 2.0f;
+		m_pCube->vCenterPoint = _vMin + m_pCube->vSize;
+	
+		KNode* tmp = Search(m_pRootNode, *m_pCube);
+		if (tmp != nullptr)
+		{
+			tmp->m_ObejctList.push_back(m_pCube);
+		}
+
+
 }
 
-void KOctree::Release()
+void KOctree::Show(KNode* _pNode)
 {
+	if (!_pNode->m_ObejctList.empty())
+	{
+		std::cout << "|||오브젝트 위치 노드|||" << "  " << "|||해당하는 위치 오브젝트 갯수|||" << std::endl;
+		std::cout << "\t" << _pNode->NodeNumber << "\t\t\t\t" << _pNode->m_ObejctList.size() << std::endl;
+	}
+	for (int iChild = 0; iChild < MAXCHILD; iChild++)
+	{
+		if (_pNode->m_pChild[iChild] != nullptr)
+		{
+			Show(_pNode->m_pChild[iChild]);
+		}
+	}
 }
