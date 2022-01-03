@@ -24,6 +24,9 @@
     <ClInclude Include="KVector.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="KCube.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KSample.cpp">
@@ -32,5 +35,12 @@
     <ClCompile Include="KOctree.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="KCube.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="VertexS.txt" />
+    <Text Include="PixelShader.txt" />
   </ItemGroup>
 </Project>

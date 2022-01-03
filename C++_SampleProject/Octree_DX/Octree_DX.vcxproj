@@ -144,13 +144,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="KOctree.h" />
+    <ClInclude Include="KCube.h" />
+    <ClInclude Include="KOctree.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="KSample.h" />
     <ClInclude Include="KVector.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="KOctree.cpp" />
+    <ClCompile Include="KCube.cpp" />
+    <ClCompile Include="KOctree.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="KSample.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="PixelShader.txt" />
+    <Text Include="VertexS.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

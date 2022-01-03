@@ -3,25 +3,8 @@
 #include <queue>
 #include <vector>
 #include <KDevice.h>
-//#include "KVector.h"
 #define MAXCHILD 8
-#define MINCUBESIZE 30.0f
-
-struct PNCT_VERTEX
-{
-	KVector3 pos;
-	KVector3 normal;
-	KVector4 color;
-	KVector2 tex;
-	PNCT_VERTEX()
-	{
-		color.x = 1.0f;
-		color.y = 1.0f;
-		color.z = 1.0f;
-		color.w = 1.0f;
-	}
-};
-
+#define MINCUBESIZE 30
 struct KCube
 {
 	KVector3 vCtrlPoint;
@@ -36,12 +19,13 @@ struct KNode
 	KNode* m_pParent;
 	KNode* m_pChild[MAXCHILD];
 	std::vector<KCube*> m_ObejctList;
-	int NodeNumber = 0;
 
-	std::vector<PNCT_VERTEX>  m_VertexList;
+	ID3D11Buffer* m_pIndexBuffer;
 	ID3D11Buffer* m_pVertexBuffer;
-
-
+	ID3D11Buffer* m_pConstantBuffer;
+	ID3D11Buffer* m_pConstantBufferPS;
+	 UINT uStride = NULL;
+	int NodeNumber = 0;
 	bool InCube(KVector3 _vPos)
 	{
 		if (m_Cube.vCtrlPoint.x <= _vPos.x && m_Cube.vMaxPoint.x >= _vPos.x &&
@@ -50,7 +34,7 @@ struct KNode
 		{
 			return true;
 		}
-			return false;
+		return false;
 	}
 
 	KNode(KVector3 _vMin, KVector3 _vMax)
@@ -67,29 +51,38 @@ struct KNode
 		}
 
 	}
+	~KNode()
+	{
+		m_ObejctList.clear();
+		if(m_pIndexBuffer)m_pIndexBuffer->Release();
+		if(m_pVertexBuffer)m_pVertexBuffer->Release();
+		if(m_pConstantBuffer)m_pConstantBuffer->Release();
+		if(m_pConstantBufferPS)m_pConstantBufferPS->Release();
+	}
 };
-
 class KOctree
 {
 public:
 	KNode* m_pRootNode;
 	int m_ChildNode = MAXCHILD;
 	int NodeCount = 0;
+
+	ID3D11InputLayout* m_pVertexLayout = nullptr;
+	ID3D11VertexShader* m_pVS = nullptr;
+	ID3D11PixelShader* m_pPS = nullptr;
 public:
-	void Init(KVector3 _vMaxCube);
 	KNode* CreateNode(KNode* _pNode, KVector3 _vMin, KVector3 _vMax);
 	bool CheckIn(KNode* _pNode, KCube _vValue);
 	void BuildTree(KNode* _pNode);
-	KNode* Search(KNode* _pNode, KCube _vValue);
-	void AddObject(KVector3 _vMin, KVector3 _vMax);
-	void Show(KNode* _pNode);
-
-	bool SetNodebuffers(KNode* _pNode, ID3D11DeviceContext* pContext);
-	void CreatevertexList(KNode* _pNode, KVector3 _vMin, KVector3 _vMax);
-	HRESULT CreateVertexBuffer(KNode* pNode);
+	bool CreateVectexBuffer(KNode* _pNode);
+	bool CreateIndexBuffer(KNode* _pNode);
+	bool CreateConstantsBuffer(KNode* _pNode, TMatrix* pWorld, TMatrix* pView, TMatrix* pProj);
+	bool CreateShaderLayout(ID3D11DeviceContext* pContext);
+	bool Release();
 public:
-	bool	Frame();
-	bool	Render(ID3D11DeviceContext* pContext);
-	bool    Release();
-};
+	KOctree();
+	~KOctree();
 
+private:
+
+};

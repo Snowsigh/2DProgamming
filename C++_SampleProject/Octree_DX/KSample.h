@@ -1,15 +1,11 @@
 #pragma once
 #include <KCore.h>
+#include "KOctree.h"
+#include "KCube.h"
 class Sample : public KCore
 {
-public:
-	KDebugCamera m_kCamera;
-
-	ID3D11RasterizerState* m_pRsWire;
-	ID3D11RasterizerState* m_pRsSolid;
-
-	bool m_bWiremod = false;
-
+public:	
+	KCubes m_kCube;
 
 public:
 	bool	Init();

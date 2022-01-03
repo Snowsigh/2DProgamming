@@ -6,6 +6,7 @@
 #include "KWrite.h"
 #include "KCamara.h"
 #include "KDxState.h"
+#include "KMap.h"
 class KCore : public KWindow
 {
 
