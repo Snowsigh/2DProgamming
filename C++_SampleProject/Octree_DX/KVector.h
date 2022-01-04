@@ -59,6 +59,34 @@ public:
 		}
 		return false;
 	}
+	bool operator >= (KVector3 p)
+	{
+		if (x >= p.x)
+		{
+			if (y >= p.y)
+			{
+				if (z >= p.z)
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	bool operator <= (KVector3 p)
+	{
+		if (x <= p.x)
+		{
+			if (y <= p.y)
+			{
+				if (z <= p.z)
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
 	//Å©±â
 	float Length()

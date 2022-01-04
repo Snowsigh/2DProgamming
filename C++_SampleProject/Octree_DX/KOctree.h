@@ -21,10 +21,10 @@ struct KNode
 	std::vector<KCube*> m_ObejctList;
 
 	ID3D11Buffer* m_pIndexBuffer;
+	UINT m_uIndexSize;
 	ID3D11Buffer* m_pVertexBuffer;
-	ID3D11Buffer* m_pConstantBuffer;
-	ID3D11Buffer* m_pConstantBufferPS;
 	 UINT uStride = NULL;
+
 	int NodeNumber = 0;
 	bool InCube(KVector3 _vPos)
 	{
@@ -56,10 +56,18 @@ struct KNode
 		m_ObejctList.clear();
 		if(m_pIndexBuffer)m_pIndexBuffer->Release();
 		if(m_pVertexBuffer)m_pVertexBuffer->Release();
-		if(m_pConstantBuffer)m_pConstantBuffer->Release();
-		if(m_pConstantBufferPS)m_pConstantBufferPS->Release();
+		
 	}
 };
+//상수버퍼
+struct KBData
+{
+	TMatrix  matWorld;
+	TMatrix  matView;
+	TMatrix  matProj;
+};
+//VS 상수 버퍼
+
 class KOctree
 {
 public:
@@ -67,21 +75,33 @@ public:
 	int m_ChildNode = MAXCHILD;
 	int NodeCount = 0;
 
+	KBData m_kbData;
 	ID3D11InputLayout* m_pVertexLayout = nullptr;
 	ID3D11VertexShader* m_pVS = nullptr;
 	ID3D11PixelShader* m_pPS = nullptr;
+	ID3D11Buffer* m_pConstantBuffer = nullptr;
+	ID3D11Buffer* m_pConstantBufferPS = nullptr;
 public:
 	KNode* CreateNode(KNode* _pNode, KVector3 _vMin, KVector3 _vMax);
-	bool CheckIn(KNode* _pNode, KCube _vValue);
+	
 	void BuildTree(KNode* _pNode);
+
 	bool CreateVectexBuffer(KNode* _pNode);
 	bool CreateIndexBuffer(KNode* _pNode);
-	bool CreateConstantsBuffer(KNode* _pNode, TMatrix* pWorld, TMatrix* pView, TMatrix* pProj);
+	bool CreateConstantsBuffer();
 	bool CreateShaderLayout(ID3D11DeviceContext* pContext);
+
+	bool SetMatrix(TMatrix* _w, TMatrix* _v, TMatrix* _p);
+
+	KNode* CheckIn(KNode* _pNode, KCube* _vValue);
+	bool ObjectCheak(KCube* _Object);
+
+	KNode* DeleteNode(KNode* _pNode);
 	bool Release();
 public:
-	KOctree();
-	~KOctree();
+	void Render(ID3D11DeviceContext* pContext);
+	void Init(KVector3 _Max,ID3D11DeviceContext* pContext);
+	bool DrawNode(KNode* _pNode, ID3D11DeviceContext* pContext);
 
 private:
 

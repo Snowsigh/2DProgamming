@@ -1,11 +1,25 @@
 #include "KOctree.h"
+void KOctree::Init(KVector3 _Max,ID3D11DeviceContext* pContext)
+{
+
+	m_pRootNode = CreateNode(nullptr, KVector3(0, 0, 0), _Max);
+	if (m_pRootNode == nullptr)
+		 return;
+	CreateConstantsBuffer();
+	CreateShaderLayout(pContext);
+	BuildTree(m_pRootNode);
+}
 KNode* KOctree::CreateNode(KNode* _pParent, KVector3 _vMin, KVector3 _vMax)
 {
 	NodeCount++;
 	KNode* pNode = new KNode(_vMin, _vMax);
 	CreateVectexBuffer(pNode);
 	CreateIndexBuffer(pNode);
-
+	if (_pParent != nullptr)
+	{
+		pNode->idepth = _pParent->idepth + 1;
+		pNode->m_pParent = _pParent;
+	}
 	pNode->NodeNumber = NodeCount;
 	if (_pParent != nullptr)
 	{
@@ -13,15 +27,6 @@ KNode* KOctree::CreateNode(KNode* _pParent, KVector3 _vMin, KVector3 _vMax)
 		pNode->m_pParent = _pParent;
 	}
 	return pNode;
-}
-bool KOctree::CheckIn(KNode* _pNode, KCube _vValue)
-{
-	if ((_pNode->m_Cube.vCtrlPoint.x <= _vValue.vCtrlPoint.x && _pNode->m_Cube.vCtrlPoint.y <= _vValue.vCtrlPoint.y && _pNode->m_Cube.vCtrlPoint.z <= _vValue.vCtrlPoint.z)
-		&& (_pNode->m_Cube.vMaxPoint.x >= _vValue.vMaxPoint.x && _pNode->m_Cube.vMaxPoint.y >= _vValue.vMaxPoint.y && _pNode->m_Cube.vMaxPoint.z >= _vValue.vMaxPoint.z))
-	{
-		return true;
-	}
-	return false;
 }
 void KOctree::BuildTree(KNode* _pNode)
 {
@@ -67,6 +72,45 @@ void KOctree::BuildTree(KNode* _pNode)
 		tmp--;
 	}
 }
+
+KNode* KOctree::CheckIn(KNode* _pNode, KCube* _vValue)
+{
+	KNode* tmpNode = _pNode;
+	if ((_pNode->m_Cube.vCtrlPoint.x <= _vValue->vCtrlPoint.x && _pNode->m_Cube.vCtrlPoint.y <= _vValue->vCtrlPoint.y && _pNode->m_Cube.vCtrlPoint.z <= _vValue->vCtrlPoint.z)
+		&& (_pNode->m_Cube.vMaxPoint.x >= _vValue->vMaxPoint.x && _pNode->m_Cube.vMaxPoint.y >= _vValue->vMaxPoint.y && _pNode->m_Cube.vMaxPoint.z >= _vValue->vMaxPoint.z))
+	{
+		for (int iChild = 0; iChild < MAXCHILD; iChild++)
+		{
+			if (_pNode->m_pChild[iChild] != nullptr)
+			tmpNode = CheckIn(_pNode->m_pChild[iChild], _vValue);
+		}
+		
+	}
+	else
+	{
+		tmpNode = _pNode->m_pParent;
+	}
+	return tmpNode;
+}
+bool KOctree::ObjectCheak(KCube* _Object)
+{
+	
+	KNode* TargetNode = CheckIn(m_pRootNode, _Object);
+	if (TargetNode == nullptr) return false;
+	
+	for (int iObject = 0; iObject < TargetNode->m_ObejctList.size(); iObject++)
+	{
+		if (TargetNode->m_ObejctList[iObject] == _Object)
+		{
+			return false;
+		}
+	}
+	TargetNode->m_ObejctList.push_back(_Object);
+	return true;
+
+
+}
+
 bool KOctree::CreateVectexBuffer(KNode* _pNode)
 {
 	KVector3 tmpMin = _pNode->m_Cube.vCtrlPoint; 
@@ -82,14 +126,14 @@ bool KOctree::CreateVectexBuffer(KNode* _pNode)
 	};
 	const Vertex vertices[] =
 	{
-	   {tmpMin.x,tmpMax.y,tmpMax.z},
-	   {tmpMin.x,tmpMin.y,tmpMax.z},
-	   {tmpMax.x,tmpMin.y,tmpMax.z},
-	   {tmpMax.x,tmpMax.y,tmpMax.z},
-	   {tmpMin.x,tmpMax.y,tmpMin.z},
-	   {tmpMin.x,tmpMin.y,tmpMin.z},
-	   {tmpMax.x,tmpMin.y,tmpMin.z},
-	   {tmpMax.x,tmpMax.y,tmpMin.z},
+	   {tmpMin.x,tmpMax.y,tmpMax.z}, // 0
+	   {tmpMin.x,tmpMin.y,tmpMax.z}, // 1
+	   {tmpMax.x,tmpMin.y,tmpMax.z}, // 2
+	   {tmpMax.x,tmpMax.y,tmpMax.z}, // 3
+	   {tmpMin.x,tmpMax.y,tmpMin.z}, // 4
+	   {tmpMin.x,tmpMin.y,tmpMin.z}, // 5
+	   {tmpMax.x,tmpMin.y,tmpMin.z}, // 6
+	   {tmpMax.x,tmpMax.y,tmpMin.z}, // 7
 	};
 	D3D11_BUFFER_DESC bd;
 	bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
@@ -113,20 +157,20 @@ bool KOctree::CreateIndexBuffer(KNode* _pNode)
 	HRESULT hr;
 	const unsigned short indices[] =
 	{
-	   0,2,1, 2,3,1,
-	   1,3,5, 3,7,5,
-	   2,6,3, 3,6,7,
-	   4,5,7, 4,7,6,
-	   0,4,2, 2,4,6,
-	   0,1,4, 1,5,4,
+	   0,1,2, 0,2,3, // ¿·¸é
+	   0,3,7, 0,7,4, // À­¸é
+	   3,2,6, 3,6,7, // ¿·¸é
+	   7,6,5, 7,5,4, // ¿·¸é
+	   4,5,1, 4,1,0, // ¿·¸é
+	   2,1,5, 2,5,6, // ¹Ø¸é
 	};
-
+	_pNode->m_uIndexSize = sizeof(indices);
 	D3D11_BUFFER_DESC ibd = {};
 	ibd.BindFlags = D3D11_BIND_INDEX_BUFFER;
 	ibd.Usage = D3D11_USAGE_DEFAULT;
 	ibd.CPUAccessFlags = 0u;
 	ibd.MiscFlags = 0u;
-	ibd.ByteWidth = sizeof(indices);
+	ibd.ByteWidth = _pNode->m_uIndexSize;
 	ibd.StructureByteStride = sizeof(unsigned short);
 	D3D11_SUBRESOURCE_DATA isd;
 	isd.pSysMem = indices;
@@ -134,41 +178,19 @@ bool KOctree::CreateIndexBuffer(KNode* _pNode)
 	if (FAILED(hr)) return false;
 	return true;
 }
-bool KOctree::CreateConstantsBuffer(KNode* _pNode, TMatrix* pWorld, TMatrix* pView, TMatrix* pProj)
+bool KOctree::CreateConstantsBuffer()
 {
 	HRESULT hr;
-	//»ó¼ö¹öÆÛ
-	struct ConstantBuffer
-	{
-		TMatrix  matWorld;
-		TMatrix  matView;
-		TMatrix  matProj;
-	};
-	//VS »ó¼ö ¹öÆÛ
-	ConstantBuffer cb;
-	if (pWorld == nullptr)
-	{
-		cb.matWorld = pWorld->Transpose();
-	}
-	if (pView != nullptr)
-	{
-		cb.matView = pView->Transpose();
-	}
-	if (pProj != nullptr)
-	{
-		cb.matProj = pProj->Transpose();
-	}
 
-	D3D11_BUFFER_DESC cbd = {};
+	D3D11_BUFFER_DESC cbd;
+	ZeroMemory(&cbd, sizeof(D3D11_BUFFER_DESC));
+	cbd.Usage = D3D11_USAGE_DEFAULT;
+	cbd.ByteWidth = sizeof(KBData);
 	cbd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-	cbd.Usage = D3D11_USAGE_DYNAMIC;
-	cbd.CPUAccessFlags = D3D10_CPU_ACCESS_WRITE;
-	cbd.MiscFlags = 0u;
-	cbd.ByteWidth = sizeof(cb);
-	cbd.StructureByteStride = 0;
 	D3D11_SUBRESOURCE_DATA csd;
-	csd.pSysMem = &cb;
-	hr = g_pd3dDevice->CreateBuffer(&cbd, &csd, &_pNode->m_pConstantBuffer);
+	ZeroMemory(&csd, sizeof(D3D11_SUBRESOURCE_DATA));
+	csd.pSysMem = &m_kbData;
+	hr = g_pd3dDevice->CreateBuffer(&cbd, &csd, &m_pConstantBuffer);
 	if (FAILED(hr)) return false;
 	//pContext->UpdateSubresource(m_pConstantBuffer, 0, NULL, &cb, 0, 0);
 
@@ -196,16 +218,31 @@ bool KOctree::CreateConstantsBuffer(KNode* _pNode, TMatrix* pWorld, TMatrix* pVi
 	};
 
 	D3D11_BUFFER_DESC cbd2 = {};
+	ZeroMemory(&cbd2, sizeof(D3D11_BUFFER_DESC));
 	cbd2.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-	cbd2.Usage = D3D11_USAGE_DYNAMIC;
-	cbd2.CPUAccessFlags = D3D10_CPU_ACCESS_WRITE;
-	cbd2.MiscFlags = 0u;
+	cbd2.Usage = D3D11_USAGE_DEFAULT;
 	cbd2.ByteWidth = sizeof(cb2);
-	cbd2.StructureByteStride = 0;
 	D3D11_SUBRESOURCE_DATA csd2;
+	ZeroMemory(&csd2, sizeof(D3D11_SUBRESOURCE_DATA));
 	csd2.pSysMem = &cb2;
-	hr = g_pd3dDevice->CreateBuffer(&cbd2, &csd2, &_pNode->m_pConstantBufferPS);
+	hr = g_pd3dDevice->CreateBuffer(&cbd2, &csd2, &m_pConstantBufferPS);
 	if (FAILED(hr)) return false;
+	return true;
+}
+bool KOctree::SetMatrix(TMatrix* _w, TMatrix* _v, TMatrix* _p)
+{
+	if (_w != nullptr)
+	{
+		m_kbData.matWorld = _w->Transpose();
+	}
+	if (_v != nullptr)
+	{
+		m_kbData.matView = _v->Transpose();
+	}
+	if (_p != nullptr)
+	{
+		m_kbData.matProj = _p->Transpose();
+	}
 	return true;
 }
 bool KOctree::CreateShaderLayout(ID3D11DeviceContext* pContext)
@@ -232,7 +269,7 @@ bool KOctree::CreateShaderLayout(ID3D11DeviceContext* pContext)
 	if (FAILED(hr)) return false;
 
 	//2. ¹ÙÀÎµå ÇÈ¼¿ ¼ÎÀÌ´õ
-	pContext->PSSetShader(m_pPS, nullptr, 0);
+	
 
 	//3. ¹öÅØ½º ¼ÎÀÌ´õ »ý¼º
 
@@ -252,7 +289,7 @@ bool KOctree::CreateShaderLayout(ID3D11DeviceContext* pContext)
 	if (FAILED(hr)) return false;
 
 	//4. ¹ÙÀÎµå ¹öÅØ½º ¼ÎÀÌ´õ
-	pContext->VSSetShader(m_pVS, nullptr, 0);
+	
 
 	//5. Input ¹öÅØ½º ·¹ÀÌ¾Æ¿ô (2D À§Ä¡¸¸)
 
@@ -272,16 +309,64 @@ bool KOctree::CreateShaderLayout(ID3D11DeviceContext* pContext)
 	m_pVSBlob->Release();
 	if (error)error->Release();
 
-	pContext->IASetInputLayout(m_pVertexLayout);
-
-	pContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	
 
 	return true;
 }
+
+
+bool KOctree::DrawNode(KNode* _pNode, ID3D11DeviceContext* pContext)
+{
+	const UINT tmpStride = _pNode->uStride;
+	const UINT tmpOffset = 0;
+	pContext->IASetVertexBuffers(0, 1, &_pNode->m_pVertexBuffer, &tmpStride, &tmpOffset);
+	pContext->IASetIndexBuffer(_pNode->m_pIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
+
+	for (int iChild = 0; iChild < MAXCHILD; iChild++)
+	{
+		if (_pNode->m_pChild[iChild] != nullptr)
+		{
+			DrawNode(_pNode->m_pChild[iChild], pContext);
+		}
+	}
+	pContext->DrawIndexed(_pNode->m_uIndexSize, 0, 0);
+	return true;
+}
+void KOctree::Render(ID3D11DeviceContext* pContext)
+{
+	pContext->UpdateSubresource(m_pConstantBuffer, 0, NULL, &m_kbData, 0, 0);
+	pContext->VSSetConstantBuffers(0, 1, &m_pConstantBuffer);
+	pContext->PSSetConstantBuffers(0, 1, &m_pConstantBufferPS);
+	pContext->PSSetShader(m_pPS, nullptr, 0);
+	pContext->VSSetShader(m_pVS, nullptr, 0);
+	pContext->IASetInputLayout(m_pVertexLayout);
+	pContext->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	DrawNode(m_pRootNode, pContext);
+}
+
 bool KOctree::Release()
 {
+	DeleteNode(m_pRootNode);
+
 	if(m_pVertexLayout)m_pVertexLayout->Release();
 	if(m_pVS)m_pVS->Release();
 	if(m_pPS)m_pPS->Release();
+	if (m_pConstantBuffer)m_pConstantBuffer->Release();
+	if (m_pConstantBufferPS)m_pConstantBufferPS->Release();
+
+
 	return true;
 }
+KNode* KOctree::DeleteNode(KNode* _pNode)
+{
+	for (int iChild = 0; iChild < MAXCHILD; iChild++)
+	{
+		if (_pNode->m_pChild[iChild] != nullptr)
+			DeleteNode(_pNode->m_pChild[iChild]);
+	}
+	delete _pNode;
+	_pNode = nullptr;
+	return nullptr;
+}
+
+

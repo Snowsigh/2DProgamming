@@ -26,9 +26,9 @@ VS_OUT VertexS(float3 p: POS, float4 c : COLOR)
 
 	output.p = vProj;
 	// c.xyzw = x;
-	output.c.x = 0.5f;
+	output.c.x = 1.0f;
 	output.c.y = 1.0f;
-	output.c.z = 0.5f;
+	output.c.z = 1.0f;
 	output.c.w = 1.0f;
 	return output;
 }
