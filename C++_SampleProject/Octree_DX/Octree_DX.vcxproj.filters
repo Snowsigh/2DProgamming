@@ -43,4 +43,7 @@
     <Text Include="VertexS.txt" />
     <Text Include="PixelShader.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
 </Project>

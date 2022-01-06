@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="KOctree">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAmBAAAAAABBAAAAAAMAAACEBAAFiEAABQACAJAIAAA=</HashCode>
+      <FileName>KOctree.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sample">
+    <Position X="13" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABACgBAAAAE=</HashCode>
+      <FileName>KSample.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="KVector3" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgEAAAAQBAAAAAAAAAAABgAQAAAAA=</HashCode>
+      <FileName>KVector.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="KCube">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAgQAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>KOctree.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="KNode">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YBEACAAAAAAAAAAAAAggQAAAAAABAAAAAAAAAEAAAwQ=</HashCode>
+      <FileName>KOctree.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="KBData">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAABAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>KOctree.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>
