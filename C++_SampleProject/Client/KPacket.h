@@ -17,18 +17,14 @@ public:
 	KPacket& operator << (long data);
 	KPacket& operator << (short data);
 	KPacket& operator << (float data);
-	KPacket& operator << (byte data);
 	KPacket& operator << (char* data);
-	KPacket& operator << (DWORD data);
 	KPacket& operator << (std::string data);
 public:
 	KPacket& operator >> (int& data);
 	KPacket& operator >> (long& data);
 	KPacket& operator >> (short& data);
 	KPacket& operator >> (float& data);
-	KPacket& operator >> (byte& data);
 	KPacket& operator >> (char* data);
-	KPacket& operator >> (DWORD& data);
 	KPacket& operator >> (std::string& data);
 public:
 	KPacket();

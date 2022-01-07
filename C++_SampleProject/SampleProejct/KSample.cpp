@@ -1,2 +1,2 @@
 #include "KSample.h"
-GAME(Octree, 1024, 768)
+GAME(Game, 1024, 768)

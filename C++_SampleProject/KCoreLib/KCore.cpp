@@ -43,7 +43,7 @@ bool	KCore::Frame() {
 bool	KCore::Render() {
 
         // 백퍼버를 지운다.
-        float ClearColor[4] = { 1.0f, 0.0f, 0.0f, 1.0f }; //red,green,blue,alpha
+        float ClearColor[4] = { 0.0f, 0.6f, 0.0f, 1.0f }; //red,green,blue,alpha
         m_pImmediateContext->ClearRenderTargetView(m_pRenderTargetView, ClearColor);
         m_pSwapChain->Present(0, 0);
         return true;
