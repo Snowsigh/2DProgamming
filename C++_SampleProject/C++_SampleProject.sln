@@ -53,6 +53,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ThreadClient", "ThreadClien
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ThreadServer", "ThreadServer\ThreadServer.vcxproj", "{86FCCEBC-9923-4FCE-9D1B-54C4501DA401}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SelectCilent", "SelectCilent\SelectCilent.vcxproj", "{7EB95D5E-7E1D-41E2-AA03-E0E477455595}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -181,6 +183,14 @@ Global
 		{86FCCEBC-9923-4FCE-9D1B-54C4501DA401}.Release|x64.Build.0 = Release|x64
 		{86FCCEBC-9923-4FCE-9D1B-54C4501DA401}.Release|x86.ActiveCfg = Release|Win32
 		{86FCCEBC-9923-4FCE-9D1B-54C4501DA401}.Release|x86.Build.0 = Release|Win32
+		{7EB95D5E-7E1D-41E2-AA03-E0E477455595}.Debug|x64.ActiveCfg = Debug|x64
+		{7EB95D5E-7E1D-41E2-AA03-E0E477455595}.Debug|x64.Build.0 = Debug|x64
+		{7EB95D5E-7E1D-41E2-AA03-E0E477455595}.Debug|x86.ActiveCfg = Debug|Win32
+		{7EB95D5E-7E1D-41E2-AA03-E0E477455595}.Debug|x86.Build.0 = Debug|Win32
+		{7EB95D5E-7E1D-41E2-AA03-E0E477455595}.Release|x64.ActiveCfg = Release|x64
+		{7EB95D5E-7E1D-41E2-AA03-E0E477455595}.Release|x64.Build.0 = Release|x64
+		{7EB95D5E-7E1D-41E2-AA03-E0E477455595}.Release|x86.ActiveCfg = Release|Win32
+		{7EB95D5E-7E1D-41E2-AA03-E0E477455595}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -207,6 +217,7 @@ Global
 		{01D2347B-29F7-4FE2-AEB8-D61435883B79} = {2E1FDAE1-E71F-46CC-BD18-2BFC8BB619E7}
 		{46CA74FC-67F3-4AB9-B85A-CE6AD1A0993A} = {DA772D6E-BB9E-457D-A0D7-2427D0DC8B6C}
 		{86FCCEBC-9923-4FCE-9D1B-54C4501DA401} = {DA772D6E-BB9E-457D-A0D7-2427D0DC8B6C}
+		{7EB95D5E-7E1D-41E2-AA03-E0E477455595} = {EF02A492-B265-4AFB-BC3E-A6553FA94AA7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9761DB80-C303-43F8-8088-C81CCEC68B1A}

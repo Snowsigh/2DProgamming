@@ -33,7 +33,7 @@ int SendPacket(SOCKET sock, char* msg, WORD type)
 {
 	// 1번 패킷 생성
 	KPacket tPacket(type);
-	tPacket << 999 << "홍길동" << (short)50 << msg;
+	tPacket << 999 << "곽근오" << (short)50 << msg;
 	KPacket tPacketTest(tPacket);
 	KChatMsg recvdata;
 	ZeroMemory(&recvdata, sizeof(recvdata));
