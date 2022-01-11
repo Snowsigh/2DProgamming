@@ -1,6 +1,5 @@
 #pragma once
 #include "KPacket.h"
-#include <list>
 class KNetUser
 {
 public:

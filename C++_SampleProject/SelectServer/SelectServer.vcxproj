@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{7eb95d5e-7e1d-41e2-aa03-e0e477455595}</ProjectGuid>
-    <RootNamespace>SelectCilent</RootNamespace>
+    <ProjectGuid>{0de6b103-5deb-4248-8caa-111fdc74236e}</ProjectGuid>
+    <RootNamespace>SelectServer</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -79,7 +79,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>../../Output</OutDir>
-    <IntDir>../../Output/SelectClient</IntDir>
+    <IntDir>../../Output/SelectServer</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -141,14 +141,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="KAsyncSelect.cpp" />
-    <ClCompile Include="KNetwork.cpp" />
+    <ClCompile Include="KMain.cpp" />
     <ClCompile Include="KNetUser.cpp" />
     <ClCompile Include="KPacket.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="KAsyncSelect.h" />
-    <ClInclude Include="KNetwork.h" />
     <ClInclude Include="KNetUser.h" />
     <ClInclude Include="KPacket.h" />
     <ClInclude Include="KPorotocol.h" />

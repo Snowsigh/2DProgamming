@@ -1,4 +1,4 @@
-#include <iostream>
+#define _WINSOCK_DEPRECATED_NO_WARNINGS
 #include "KNetwork.h"
 
 bool KNetwork::InitNetwork()
