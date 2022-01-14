@@ -4,5 +4,6 @@
 #include <string>
 #include <list>
 #include <iostream>
+#include <process.h>
 
 #pragma comment	(lib, "ws2_32.lib")
