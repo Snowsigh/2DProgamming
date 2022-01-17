@@ -149,18 +149,34 @@ copy "..\\..\\Output\\NetServerLib.lib" "..\\..\\Server\\lib\\NetServerLib.lib"<
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="KAcceptor.h" />
     <ClInclude Include="KAsyncSelect.h" />
+    <ClInclude Include="KIOCP.h" />
+    <ClInclude Include="KLock.h" />
     <ClInclude Include="KNetUser.h" />
     <ClInclude Include="KNetwork.h" />
     <ClInclude Include="KPacket.h" />
+    <ClInclude Include="KPacketPool.h" />
     <ClInclude Include="KProtocol.h" />
+    <ClInclude Include="KServer.h" />
+    <ClInclude Include="KServerObject.h" />
     <ClInclude Include="KStd.h" />
+    <ClInclude Include="KThread.h" />
+    <ClInclude Include="KUser.h" />
+    <ClInclude Include="KUserMgr.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="KAcceptor.cpp" />
     <ClCompile Include="KAsyncSelect.cpp" />
+    <ClCompile Include="KIOCP.cpp" />
     <ClCompile Include="KNetUser.cpp" />
     <ClCompile Include="KNetwork.cpp" />
     <ClCompile Include="KPacket.cpp" />
+    <ClCompile Include="KPacketPool.cpp" />
+    <ClCompile Include="KServer.cpp" />
+    <ClCompile Include="KThread.cpp" />
+    <ClCompile Include="KUser.cpp" />
+    <ClCompile Include="KUserMgr.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
