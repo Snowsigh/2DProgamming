@@ -153,7 +153,26 @@ bool KServer::SendPool(KUser* pUser, UPACKET& packet)
 	return true;
 }
 
-bool KServer::SendMsg(KUser* pUser, int type, char* data, int iSize)
+int KServer::SendMsg(SOCKET sock, UPACKET& packet)
+{
+	char* pMsg = (char*)&packet;
+	int iSendSize = 0;
+	do {
+		int iSendByte = send(sock, &pMsg[iSendSize],
+			packet.ph.len - iSendSize, 0);
+		if (iSendByte == SOCKET_ERROR)
+		{
+			if (WSAGetLastError() != WSAEWOULDBLOCK)
+			{
+				return -1;
+			}
+		}
+		iSendSize += iSendByte;
+	} while (iSendSize < packet.ph.len);
+	return iSendSize;
+}
+
+bool KServer::SendMsg(KUser* pUser, WORD type, char* data, int iSize)
 {
 	{
 		KLock lock(this);
@@ -194,6 +213,18 @@ void KServer::Broadcast(K_PACKET& tPacket)
 			if (user->isConnect != true) continue;
 			tPacket.pUser = user;
 			m_SendPool.Push(tPacket);
+		}
+	}
+}
+
+void KServer::Broadcast(KPacket& t)
+{
+	for (KNetUser* senduser : m_UserList)
+	{
+		int iRet = SendMsg(senduser->m_Sock, t.m_uPacket);
+		if (iRet <= 0)
+		{
+			senduser->m_bConnect = false;
 		}
 	}
 }
