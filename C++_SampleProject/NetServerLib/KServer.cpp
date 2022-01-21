@@ -2,11 +2,11 @@
 #include "KIOCP.h"
 #include "KUserMgr.h"
 
-bool KServer::Init()
+bool KServer::Init(int iPort )
 {
     CreateThread();
     I_IOCP.Init();
-    return m_Accepter.Set();
+    return m_Accepter.Set(iPort);
 }
 
 bool KServer::Start()

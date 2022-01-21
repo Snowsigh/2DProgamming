@@ -3,17 +3,23 @@
 #include "KAcceptor.h"
 #include "KPacket.h"
 #include "KNetUser.h"
+struct XPacket
+{
+	KNetUser* pUser;
+	KPacket   packet;
+};
 
 class KServer : public KSingleton<KServer>, public KThread
 {
 public:
 	std::list<KNetUser*> m_UserList;
+	std::list<XPacket> m_packetPool;
 public:
 	KPacketPool m_RecvPool;
 	KPacketPool m_SendPool;
 	KAcceptor m_Accepter;
 public:
-	bool Init();
+	bool Init(int iPort);
 	bool Start();
 	bool Run();
 	bool SendPool(KUser* pUser, int type, char* data, int iSize);

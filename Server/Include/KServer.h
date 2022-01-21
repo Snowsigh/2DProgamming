@@ -13,7 +13,7 @@ public:
 	KPacketPool m_SendPool;
 	KAcceptor m_Accepter;
 public:
-	bool Init();
+	bool Init(int iPort);
 	bool Start();
 	bool Run();
 	bool SendPool(KUser* pUser, int type, char* data, int iSize);

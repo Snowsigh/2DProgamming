@@ -14,7 +14,7 @@ struct KLoginAck
 class KLobbyServer : public KServer
 {
 public:
-	HANDLE g_WorkThread[MAX_WORKER_THREAD];
+	HANDLE g_hWorkThread[MAX_WORKER_THREAD];
 	HANDLE g_hIOCP;
 public:
 	virtual void LoginReq(KPacket& t, KUser* user);

@@ -155,6 +155,7 @@ copy "..\\..\\Output\\NetServerLib.lib" "..\\..\\Server\\lib\\NetServerLib.lib"<
     <ClInclude Include="KLock.h" />
     <ClInclude Include="KNetUser.h" />
     <ClInclude Include="KNetwork.h" />
+    <ClInclude Include="KObjectPool.h" />
     <ClInclude Include="KPacket.h" />
     <ClInclude Include="KPacketPool.h" />
     <ClInclude Include="KProtocol.h" />

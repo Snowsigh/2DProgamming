@@ -1,5 +1,24 @@
 #pragma once
 #include "KPacket.h"
+#include "KObjectPool.h"
+class KServer;
+// 비동기 작업이 완료 시점까지 OVERLAPPED 유지되어 있어야 된다.
+struct KOV : public KObjectPool<KOV>
+{
+	enum { MODE_RECV = 1, MODE_SEND = 2, MODE_EXIT };
+	OVERLAPPED ov;
+	int  type;
+	KOV(int packetType)
+	{
+		ZeroMemory(&ov, sizeof(OVERLAPPED));
+		type = packetType;
+	}
+	KOV()
+	{
+		ZeroMemory(&ov, sizeof(OVERLAPPED));
+		type = MODE_RECV;
+	}
+};
 class KNetUser
 {
 public:

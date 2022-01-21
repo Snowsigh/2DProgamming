@@ -4,6 +4,7 @@ class KServerObject
 {
 public:
 	CRITICAL_SECTION m_cs;
+	HANDLE m_hKillEvent;
 public:
 	KServerObject()
 	{
