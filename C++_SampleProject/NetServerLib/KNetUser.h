@@ -1,6 +1,7 @@
 #pragma once
 #include "KPacket.h"
 #include "KObjectPool.h"
+#include "KServerObject.h"
 class KServer;
 // 비동기 작업이 완료 시점까지 OVERLAPPED 유지되어 있어야 된다.
 struct KOV : public KObjectPool<KOV>
@@ -44,13 +45,15 @@ public:
 
 	int Dispatch(DWORD dwTrans, KOV* tov);
 	int DispatchRecv(char* szRecvBuffer, int iRecvByte);
-	/*int DispatchSend(DWORD dwTrans);*/
+	int DispatchSend(DWORD dwTrans);
 	void set(SOCKET sock, SOCKADDR_IN addr, KServer* pServer);
 	int  Recv();
 	int  SendMsg(char* msg, int iSize, WORD type);
 	int  SendMsg(UPACKET& packet);
 	bool DisConnect();
-
+public:
+	KNetUser();
+	virtual ~KNetUser();
 
 };
 

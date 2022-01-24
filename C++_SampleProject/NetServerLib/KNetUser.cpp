@@ -137,10 +137,10 @@ int KNetUser::DispatchRecv(char* szRecvBuffer, int iRecvByte)
 	return 1;
 }
 
-//int KNetUser::DispatchSend(DWORD dwTrans)
-//{
-//	return 0;
-//}
+int KNetUser::DispatchSend(DWORD dwTrans)
+{
+	return 0;
+}
 
 void KNetUser::set(SOCKET sock, SOCKADDR_IN addr, KServer* pServer)
 {
@@ -158,6 +158,25 @@ void KNetUser::set(SOCKET sock, SOCKADDR_IN addr, KServer* pServer)
 
 int KNetUser::Recv()
 {
+	KOV* ov = new KOV(KOV::MODE_RECV);
+	m_wsaRecvBuffer.len = sizeof(char) * 256;
+	m_wsaRecvBuffer.buf = m_szRecv;
+	DWORD dwRead;
+	DWORD lpFlags = 0;
+	BOOL ret = WSARecv(m_Sock,
+		&m_wsaRecvBuffer,
+		1,
+		&dwRead,
+		&lpFlags,
+		(WSAOVERLAPPED*)ov,
+		nullptr);
+	if (ret == SOCKET_ERROR)
+	{
+		if (WSAGetLastError() != WSA_IO_PENDING)
+		{
+			return false;
+		}
+	}
 	return 0;
 }
 

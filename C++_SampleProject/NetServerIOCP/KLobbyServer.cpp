@@ -71,11 +71,11 @@ bool KLobbyServer::InitServer(int iPort)
 			this, 0, &id);
 	}
 
-	m_fnExecutePacket.insert(std::make_pair(
+	/*m_fnExecutePacket.insert(std::make_pair(
 		PACKET_CHAT_MSG,
-		std::bind(&TLobbyServer::ChatMsg, this,
+		std::bind(&KLobbyServer::ChatMsg, this,
 			std::placeholders::_1,
-			std::placeholders::_2)));
+			std::placeholders::_2)));*/
 }
 
 bool KLobbyServer::Run()

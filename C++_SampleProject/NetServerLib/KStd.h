@@ -6,7 +6,8 @@
 #include <iostream>
 #include <process.h>
 #include <vector>
-
+#include <map>
+#include <functional>
 #pragma comment	(lib, "ws2_32.lib")
 
 template <class T> class KSingleton

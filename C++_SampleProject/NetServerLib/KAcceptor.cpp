@@ -1,7 +1,6 @@
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 #include "KAcceptor.h"
-#include "KUserMgr.h"
-#include "KIOCP.h"
+#include "KServer.h"
 
 bool KAcceptor::Set(int iPort, const char* address)
 {
@@ -48,20 +47,33 @@ bool KAcceptor::Set(int iPort, const char* address)
 
 bool KAcceptor::Run()
 {
-	int addlen = sizeof(SOCKADDR);
+	KServer* pServer = (KServer*)m_pObject;
+	SOCKET sock = m_ListenSock;
+	SOCKADDR_IN clientAddr;
+	int iLen = sizeof(clientAddr);
 	while (1)
 	{
-		KUser* user = new KUser;
-		user->sock = accept(m_ListenSock, (SOCKADDR*)&user->clientaddr, &addlen);
-		if (user->sock == INVALID_SOCKET)
+		//DWORD dwID = GetCurrentThreadId();
+		//std::cout << dwID << " MainThread" << std::endl;
+		SOCKET clientSock = accept(sock,
+			(sockaddr*)&clientAddr, &iLen);
+		if (clientSock == SOCKET_ERROR)
 		{
-			ERROR_MSG("Server::accept");
+			int iError = WSAGetLastError();
+			if (iError != WSAEWOULDBLOCK)
+			{
+				std::cout << "ErrorCode=" << iError << std::endl;
+				break;
+			}
 		}
-		I_IOCP.SetSocketBind(user->sock, (ULONG_PTR)user);
-		I_USERMGR.AddUser(user);
+		else
+		{
+			pServer->AddUser(clientSock, clientAddr);
+			std::cout << pServer->m_UserList.size() << " 명 접속중.." << std::endl;
+		}
+		Sleep(1);
 	}
-	closesocket(m_ListenSock);
-	return true;
+	return 1;
 }
 
 KAcceptor::KAcceptor()

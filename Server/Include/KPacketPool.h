@@ -1,5 +1,4 @@
 #pragma once
-#include "KLock.h"
 #include "KProtocol.h"
 
 class KUser;

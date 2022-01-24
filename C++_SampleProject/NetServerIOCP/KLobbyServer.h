@@ -17,6 +17,7 @@ public:
 	HANDLE g_hWorkThread[MAX_WORKER_THREAD];
 	HANDLE g_hIOCP;
 public:
+
 	virtual void LoginReq(KPacket& t, KUser* user);
 	virtual void ChatMsg(KPacket& t, KUser* user);
 
