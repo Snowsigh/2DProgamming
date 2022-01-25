@@ -94,7 +94,15 @@ struct KChatMsg
 	short damage;
 	char chMsg[256];
 };
-
+struct KLoginReq
+{
+	char szID[20];
+	char szPS[20];
+};
+struct KLoginAck
+{
+	int iResult;// 1=승인, -1=ID없다. -2=PS없다.
+};
 typedef struct {
 	int   iIndex;
 	char  szName[USER_NAME_SIZE];

@@ -1,5 +1,6 @@
 #pragma once
-#include "KStd.h"
+#include <Windows.h>
+#include <string>
 #define PACKET_HEADER_SIZE 4
 #define MAX_MSG_SIZE 4096
 

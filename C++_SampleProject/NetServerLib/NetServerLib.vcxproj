@@ -151,7 +151,6 @@ copy "..\\..\\Output\\NetServerLib.lib" "..\\..\\Server\\lib\\NetServerLib.lib"<
   <ItemGroup>
     <ClInclude Include="KAcceptor.h" />
     <ClInclude Include="KNetUser.h" />
-    <ClInclude Include="KNetwork.h" />
     <ClInclude Include="KObjectPool.h" />
     <ClInclude Include="KPacket.h" />
     <ClInclude Include="KProtocol.h" />
@@ -163,10 +162,12 @@ copy "..\\..\\Output\\NetServerLib.lib" "..\\..\\Server\\lib\\NetServerLib.lib"<
   <ItemGroup>
     <ClCompile Include="KAcceptor.cpp" />
     <ClCompile Include="KNetUser.cpp" />
-    <ClCompile Include="KNetwork.cpp" />
     <ClCompile Include="KPacket.cpp" />
     <ClCompile Include="KServer.cpp" />
     <ClCompile Include="KThread.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

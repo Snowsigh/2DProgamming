@@ -14,7 +14,6 @@ public:
 public:
 	int SendMsg(SOCKET sock, char* msg, WORD type);
 	int SendMsg(SOCKET sock, UPACKET& packet);
-	int AddUser(SOCKET sock);
 	int RecvUser(KNetUser& user);
 };
 

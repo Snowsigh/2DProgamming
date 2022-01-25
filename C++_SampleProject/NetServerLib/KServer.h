@@ -9,7 +9,7 @@ struct XPacket
 	KPacket   packet;
 };
 
-class KServer : public KSingleton<KServer>, public KThread
+class KServer : public KThread
 {
 	KAcceptor m_Accept;
 public:
@@ -31,7 +31,7 @@ public:
 	bool SendMsg(KNetUser* pUser, UPACKET& packet);
 	int BroadcastUserPacketPool(KNetUser* user);
 	int Broadcast(KPacket& t);
-	void LoginReq(KPacket& t, KNetUser* user);
+	virtual void LoginReq(KPacket& t, KNetUser* user);
 public:
 	virtual bool AddUser(SOCKET sock, SOCKADDR_IN clientAddr);
 	virtual bool DelUser(SOCKET sock);

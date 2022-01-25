@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="KAcceptor" Collapsed="true">
+    <Position X="1" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAgAAABACAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>KAcceptor.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KNetUser">
+    <Position X="5.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAEQIlAAAAQCAAgAQoAAAIAMAACAAAFAAAEAgEAgA=</HashCode>
+      <FileName>KNetUser.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KObjectPool&lt;T&gt;">
+    <Position X="10.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAABAAAAAAAAAAgAAAQAAgAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>KObjectPool.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KPacket">
+    <Position X="7.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAEAAAhAAEIACAAgACAAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>KPacket.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KServer" Collapsed="true">
+    <Position X="3" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAADBCgAAAAAAAAAAAAABACAAAgAIACAhAEAAI=</HashCode>
+      <FileName>KServer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KServerObject">
+    <Position X="3.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAAAAAAAAEAIAABAAAAAAAAAAAA=</HashCode>
+      <FileName>KServerObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KSingleton&lt;T&gt;" Collapsed="true">
+    <Position X="18.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>KStd.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCheck&lt;T&gt;" Collapsed="true">
+    <Position X="18.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>KStd.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KThread">
+    <Position X="1.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EABAAQAACAAAAgoAAAAAAAAAAAAAAQAAAAIAAACAAAI=</HashCode>
+      <FileName>KThread.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="KOV">
+    <Position X="10.25" Y="4" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="KOV::__unnamed_enum_0897_1" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>KNetUser.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAAAABAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>KNetUser.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_089e_1" Collapsed="true">
+    <Position X="16.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>KProtocol.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_089e_2" Collapsed="true">
+    <Position X="15.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAAA=</HashCode>
+      <FileName>KProtocol.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="KChatMsg" Collapsed="true">
+    <Position X="6.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>KProtocol.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="KLoginReq" Collapsed="true">
+    <Position X="8.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASAAAAAAAAA=</HashCode>
+      <FileName>KProtocol.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="KLoginAck" Collapsed="true">
+    <Position X="8.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>KProtocol.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_089e_3" Collapsed="true">
+    <Position X="20" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>KProtocol.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_089e_4" Collapsed="true">
+    <Position X="14.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>KProtocol.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_089e_5" Collapsed="true">
+    <Position X="18.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>KProtocol.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_089e_6" Collapsed="true">
+    <Position X="18.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQCAAAAAAA=</HashCode>
+      <FileName>KProtocol.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="XPacket" Collapsed="true">
+    <Position X="6.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>KServer.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Typedef Name="PACKET_HAEDER" Collapsed="true">
+    <Position X="16.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>KProtocol.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="UPACKET" Collapsed="true">
+    <Position X="16.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>KProtocol.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="P_UPACKET" Collapsed="true">
+    <Position X="14.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>KProtocol.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="USER_BASE" Collapsed="true">
+    <Position X="20" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>KProtocol.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="USER_NAME_ACK" Collapsed="true">
+    <Position X="14.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>KProtocol.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="USER_NAME_REQ" Collapsed="true">
+    <Position X="18.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>KProtocol.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="USER_CHAT_MSG" Collapsed="true">
+    <Position X="18.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>KProtocol.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Enum Name="KPACKET_TYPE" Collapsed="true">
+    <Position X="10.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QABCIYCiIANACEEAQJACACAAAAQCKoAAAiMkMQICAAA=</HashCode>
+      <FileName>KProtocol.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>

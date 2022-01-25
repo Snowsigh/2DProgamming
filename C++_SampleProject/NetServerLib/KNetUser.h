@@ -41,19 +41,15 @@ public:
 	std::list<KPacket> m_pPacketPool;
 
 	int DispatchRead(char* szRecvBuffer, int iRecvByte);
-	void set(SOCKET sock, SOCKADDR_IN addr);
-
 	int Dispatch(DWORD dwTrans, KOV* tov);
 	int DispatchRecv(char* szRecvBuffer, int iRecvByte);
 	int DispatchSend(DWORD dwTrans);
+
 	void set(SOCKET sock, SOCKADDR_IN addr, KServer* pServer);
 	int  Recv();
 	int  SendMsg(char* msg, int iSize, WORD type);
 	int  SendMsg(UPACKET& packet);
 	bool DisConnect();
-public:
-	KNetUser();
-	virtual ~KNetUser();
 
 };
 

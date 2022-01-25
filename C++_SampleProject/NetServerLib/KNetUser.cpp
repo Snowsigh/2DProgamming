@@ -47,18 +47,6 @@ int KNetUser::DispatchRead(char* szRecvBuffer, int iRecvByte)
 	return 1;
 }
 
-void KNetUser::set(SOCKET sock, SOCKADDR_IN addr)
-{
-	m_bConnect = true;
-	ZeroMemory(m_szRecvBuffer, sizeof(char) * 2048);
-	m_iPacketPos = 0;
-	m_iSavePos = 0;
-	m_iReadPos = 0;
-	m_Sock = sock;
-	m_Addr = addr;
-	m_csName = inet_ntoa(addr.sin_addr);
-	m_iPort = ntohs(addr.sin_port);
-}
 
 int KNetUser::Dispatch(DWORD dwTrans, KOV* tov)
 {
