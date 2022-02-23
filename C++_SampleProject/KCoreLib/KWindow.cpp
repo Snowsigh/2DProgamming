@@ -9,7 +9,17 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     // 메세지 핸들링
     assert(g_pWindow);
-    return g_pWindow->WndMsgProc(hWnd, message, wParam, lParam);
+    g_pWindow->WndMsgProc(hWnd, message, wParam, lParam);
+    switch (message)
+    {
+    case WM_DESTROY:
+    {
+        PostQuitMessage(0);
+    }break;
+    default:
+        return DefWindowProc(hWnd, message, wParam, lParam);
+    }
+    return 0;
 }
 LRESULT  KWindow::MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {

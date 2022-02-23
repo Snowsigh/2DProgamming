@@ -1,5 +1,8 @@
 #pragma once
 #include "KDevice.h"
+#include "KBaseObject.h"
+#include "KInput.h"
+#include "KTimer.h"
 class KCore : public KDevice
 {
 

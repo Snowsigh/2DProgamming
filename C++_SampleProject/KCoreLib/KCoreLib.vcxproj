@@ -154,8 +154,13 @@ copy "..\\..\\Output\\KCoreLib.lib" "..\\..\\CoreLib\\Lib\\"</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="KBaseObject.h" />
+    <ClInclude Include="KCollsion.h" />
     <ClInclude Include="KInput.h" />
+    <ClInclude Include="KObject2D.h" />
+    <ClInclude Include="KObjectMgr.h" />
     <ClInclude Include="KTimer.h" />
+    <ClInclude Include="KVector.h" />
     <ClInclude Include="StringConverter.h" />
     <ClInclude Include="KCore.h" />
     <ClInclude Include="KDevice.h" />
@@ -163,8 +168,13 @@ copy "..\\..\\Output\\KCoreLib.lib" "..\\..\\CoreLib\\Lib\\"</Command>
     <ClInclude Include="KWindow.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="KBaseObject.cpp" />
+    <ClCompile Include="KCollsion.cpp" />
     <ClCompile Include="KInput.cpp" />
+    <ClCompile Include="KObject2D.cpp" />
+    <ClCompile Include="KObjectMgr.cpp" />
     <ClCompile Include="KTimer.cpp" />
+    <ClCompile Include="KVector.cpp" />
     <ClCompile Include="StringConverter.cpp" />
     <ClCompile Include="KCore.cpp" />
     <ClCompile Include="KDevice.cpp" />

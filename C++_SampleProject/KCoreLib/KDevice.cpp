@@ -20,7 +20,6 @@ bool KDevice::CreateDevice()
 	D3D_FEATURE_LEVEL featureLevels[] =
 	{
 		D3D_FEATURE_LEVEL_11_0,
-		D3D_FEATURE_LEVEL_10_1,
 		D3D_FEATURE_LEVEL_10_0,
 	};
 	UINT numFeatureLevels = ARRAYSIZE(featureLevels);
@@ -62,26 +61,40 @@ bool KDevice::CreateDevice()
 	{
 		return false;
 	}
-	//////////////////////////////////
-	 // Create a render target view
+
+	CreateRenderTarget();
+	CreateViewPort();
+
+	return true;
+	
+}
+
+bool KDevice::CreateRenderTarget()
+{
+	HRESULT hr;
+	//랜더타켓 생성
 	ID3D11Texture2D* pBackBuffer;
 	hr = m_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
 	if (FAILED(hr))
 	{
-		return false;
+		return hr;
 	}
 
 	hr = m_pd3dDevice->CreateRenderTargetView(pBackBuffer, NULL, &m_pRenderTargetView);
 	pBackBuffer->Release();
 	if (FAILED(hr))
 	{
-		return false;
+		return hr;
 	}
 	m_pImmediateContext->OMSetRenderTargets(1, &m_pRenderTargetView, NULL);
-	///////////////////////////////////
+	return true;
+}
+
+bool KDevice::CreateViewPort()
+{
+	//뷰포트 생성
 	DXGI_SWAP_CHAIN_DESC Desc;
 	m_pSwapChain->GetDesc(&Desc);
-	// Setup the viewport    
 	m_ViewPort.Width = (FLOAT)Desc.BufferDesc.Width;
 	m_ViewPort.Height = (FLOAT)Desc.BufferDesc.Height;
 	m_ViewPort.MinDepth = 0.0f;

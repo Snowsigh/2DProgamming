@@ -16,6 +16,8 @@ public:
 
 public:
 	bool		CreateDevice();
+	bool		CreateRenderTarget();
+	bool		CreateViewPort();
 	bool		CleanUpDevice();
 	KDevice();
 	~KDevice();
