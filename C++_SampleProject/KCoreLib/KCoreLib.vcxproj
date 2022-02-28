@@ -83,7 +83,7 @@
     <PublicIncludeDirectories>
     </PublicIncludeDirectories>
     <IncludePath>$(SolutionDir)\KCoreLib\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\KCoreLib\libs;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)\KCoreLib\Lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -154,13 +154,19 @@ copy "..\\..\\Output\\KCoreLib.lib" "..\\..\\CoreLib\\Lib\\"</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="KBaseMgr.h" />
     <ClInclude Include="KBaseObject.h" />
     <ClInclude Include="KCollsion.h" />
     <ClInclude Include="KInput.h" />
     <ClInclude Include="KObject2D.h" />
     <ClInclude Include="KObjectMgr.h" />
+    <ClInclude Include="KShaderMgr.h" />
+    <ClInclude Include="KSoundMgr.h" />
+    <ClInclude Include="KTextureMgr.h" />
     <ClInclude Include="KTimer.h" />
     <ClInclude Include="KVector.h" />
+    <ClInclude Include="KWorld.h" />
+    <ClInclude Include="KWriteFont.h" />
     <ClInclude Include="StringConverter.h" />
     <ClInclude Include="KCore.h" />
     <ClInclude Include="KDevice.h" />
@@ -173,8 +179,13 @@ copy "..\\..\\Output\\KCoreLib.lib" "..\\..\\CoreLib\\Lib\\"</Command>
     <ClCompile Include="KInput.cpp" />
     <ClCompile Include="KObject2D.cpp" />
     <ClCompile Include="KObjectMgr.cpp" />
+    <ClCompile Include="KShaderMgr.cpp" />
+    <ClCompile Include="KSoundMgr.cpp" />
+    <ClCompile Include="KTextureMgr.cpp" />
     <ClCompile Include="KTimer.cpp" />
     <ClCompile Include="KVector.cpp" />
+    <ClCompile Include="KWorld.cpp" />
+    <ClCompile Include="KWriteFont.cpp" />
     <ClCompile Include="StringConverter.cpp" />
     <ClCompile Include="KCore.cpp" />
     <ClCompile Include="KDevice.cpp" />

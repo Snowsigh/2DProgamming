@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Vector">
+      <UniqueIdentifier>{fc7cfde7-cf0e-4dc4-bcb3-d9b1897bece6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{570f0aff-aae9-42db-8285-bd6bd8a90f82}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KWindow.h">
@@ -36,9 +42,6 @@
     <ClInclude Include="KInput.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="KVector.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="KBaseObject.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -48,8 +51,29 @@
     <ClInclude Include="KObject2D.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="KObjectMgr.h">
+    <ClInclude Include="KWorld.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="KWriteFont.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="KVector.h">
+      <Filter>Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="KBaseMgr.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="KObjectMgr.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="KShaderMgr.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="KSoundMgr.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="KTextureMgr.h">
+      <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -71,9 +95,6 @@
     <ClCompile Include="KInput.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="KVector.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="KBaseObject.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -83,8 +104,26 @@
     <ClCompile Include="KObject2D.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="KObjectMgr.cpp">
+    <ClCompile Include="KWorld.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="KWriteFont.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="KVector.cpp">
+      <Filter>Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="KObjectMgr.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="KShaderMgr.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="KSoundMgr.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="KTextureMgr.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

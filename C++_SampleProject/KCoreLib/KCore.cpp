@@ -1,6 +1,8 @@
 #include "KCore.h"
-
-
+#include "KObjectMgr.h"
+#include "KShaderMgr.h"
+#include "KSoundMgr.h"
+#include "KTextureMgr.h"
 
 bool	KCore::GameRun()
 {
@@ -10,6 +12,26 @@ bool	KCore::GameRun()
 }
 bool	KCore::GameInit()
 {
+    m_GameTimer.Init();
+    KInput::Get().Init();
+    if (SUCCEEDED(InitDeivice()))
+    {
+        I_Shader.Set(m_pd3dDevice);
+        I_Texture.Set(m_pd3dDevice);
+
+        if (m_dwWrite.Init())
+        {
+            IDXGISurface1* pSurface = nullptr;
+            HRESULT hr = m_pSwapChain->GetBuffer(0,
+                __uuidof(IDXGISurface1),
+                (void**)&pSurface);
+            if (SUCCEEDED(hr))
+            {
+                m_dwWrite.SetRenderTarget(pSurface);
+            }
+            if (pSurface) pSurface->Release();
+        }
+    }
     Init();
     return true;
 }
@@ -52,6 +74,9 @@ bool	KCore::Render() {
 bool	KCore::Release() {
     CleanUpDevice();
     return true;
+}
+void KCore::ResizeDevice(UINT iWidth, UINT iHeight)
+{
 }
 bool KCore::Run()
 {

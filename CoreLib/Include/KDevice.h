@@ -15,10 +15,12 @@ public:
 
 
 public:
+	HRESULT		    InitDeivice();
 	bool		CreateDevice();
 	bool		CreateRenderTarget();
 	bool		CreateViewPort();
 	bool		CleanUpDevice();
+	void			ResizeDevice(UINT iWidth, UINT iHeight);
 	KDevice();
 	~KDevice();
 };

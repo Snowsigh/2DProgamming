@@ -1,5 +1,14 @@
 #include "KDevice.h"
 
+HRESULT KDevice::InitDeivice()
+{
+	HRESULT hr = S_OK;
+	CreateDevice();
+	CreateRenderTarget();
+	CreateViewPort();
+	return hr;
+}
+
 bool KDevice::CreateDevice()
 {
 	HRESULT hr;
@@ -118,6 +127,23 @@ bool KDevice::CleanUpDevice()
 	m_pRenderTargetView = NULL;
 	m_pImmediateContext = NULL;
 	return true;
+}
+void KDevice::ResizeDevice(UINT iWidth, UINT iHeight)
+{
+	m_pImmediateContext->OMSetRenderTargets(0, NULL, NULL);
+	if (m_pRenderTargetView)m_pRenderTargetView->Release();
+
+	HRESULT hr = m_pSwapChain->ResizeBuffers(m_SwapChainDesc.BufferCount,
+		iWidth, iHeight,
+		m_SwapChainDesc.BufferDesc.Format,
+		m_SwapChainDesc.Flags);
+	if (SUCCEEDED(hr))
+	{
+		m_pSwapChain->GetDesc(&m_SwapChainDesc);
+
+	}
+	CreateRenderTarget();
+	CreateViewPort();
 }
 KDevice::KDevice(void)
 {
