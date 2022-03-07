@@ -1,5 +1,8 @@
 #include "KTimer.h"
-#include <tchar.h>
+
+
+float   g_fSecPerFrame = 0.0f;
+float   g_fGameTimer = 0.0f;
 bool KTimer::Init()
 {
     m_iFPS = 0;
@@ -19,6 +22,9 @@ bool KTimer::Frame()
     m_fAccumulation += dwElapseTick / 1000.0f;
     m_fSecPerFrame = dwElapseTick / 1000.0f;
     m_fFrameTime += m_fSecPerFrame;
+
+    g_fSecPerFrame = m_fSecPerFrame;
+    g_fGameTimer = m_fFrameTime;
 
     if (m_fFrameTime >= 1.0f)
     {

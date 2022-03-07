@@ -1,3 +1,4 @@
+#include "..\KCoreClient\Sample.h"
 #include "KSample.h"
 GAME(Octree, 1024, 768)
 bool Sample::Init()

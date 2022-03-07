@@ -1,7 +1,11 @@
 #pragma once
 #include "KStd.h"
+#include <windows.h>
+#pragma comment	(lib, "Winmm.lib")
 class KTimer : public KSingleton<KTimer>
 {
+public:
+
 	UINT m_iFPS;
 	float m_fSecPerFrame;
 	float m_fAccumulation;

@@ -9,6 +9,7 @@ public:
 	};
 	ID3D11Device* m_pd3dDevice;
 	ID3D11DeviceContext* m_pContext;
+	bool m_bLoadzone = false;
 public:
 	static KWorld* m_pWorld;
 	std::map<std::wstring, KObject2D*> m_UIobj;
@@ -17,7 +18,7 @@ public:
 	std::map<std::wstring, KObject2D*> m_Mapobj;
 	using m_mapiter = std::map<std::wstring, KObject2D*>::iterator;
 public:
-	virtual bool	Load(std::wstreambuf saveFile);
+	virtual bool	Load(std::wstring saveFile);
 	virtual bool	Init();
 	virtual bool	Frame();
 	virtual bool	Render();

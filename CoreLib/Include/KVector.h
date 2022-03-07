@@ -17,7 +17,14 @@ struct KFloat3
 		float v[3];
 	};
 };
-
+struct KFloat4
+{
+	union
+	{
+		struct { float x, y, z, w; };
+		float v[4];
+	};
+};
 class KVector3 : public KFloat3
 {
 public:
@@ -61,4 +68,27 @@ public:
 	// Å©±â
 	float Length();
 	float Distance(KVector2& v);
+}; 
+
+class KVector4 : public KFloat4
+{
+public:
+	KVector4() {
+		v[0] = 0.0f;
+		v[1] = 0.0f;
+		v[2] = 0.0f;
+		v[3] = 0.0f;
+	};
+	KVector4(float x, float y, float z, float w) {
+		v[0] = x;
+		v[1] = y;
+		v[2] = z;
+		v[3] = w;
+	}
+	KVector4(const KVector4& v) {
+		x = v.x;
+		y = v.y;
+		z = v.z;
+		w = v.w;
+	}
 };

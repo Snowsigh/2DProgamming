@@ -3,7 +3,7 @@
 #include "KShaderMgr.h"
 #include "KSoundMgr.h"
 #include "KTextureMgr.h"
-
+#include "KDxState.h"
 bool	KCore::GameRun()
 {
     if (!GameFrame()) return false;
@@ -13,12 +13,12 @@ bool	KCore::GameRun()
 bool	KCore::GameInit()
 {
     m_GameTimer.Init();
-    KInput::Get().Init();
+    I_INPUT.Init();
     if (SUCCEEDED(InitDeivice()))
     {
         I_Shader.Set(m_pd3dDevice);
         I_Texture.Set(m_pd3dDevice);
-
+        KDxState::SetState(m_pd3dDevice);
         if (m_dwWrite.Init())
         {
             IDXGISurface1* pSurface = nullptr;
@@ -37,46 +37,43 @@ bool	KCore::GameInit()
 }
 bool	KCore::GameFrame()
 {
-
+    m_GameTimer.Frame();
+    I_ObjectMgr.Frame();
+    I_Sound.Frame();
+    m_dwWrite.Frame();
+    I_INPUT.Frame();
+    
     Frame();
     return true;
 }
 bool	KCore::GameRender()
 {
+    // 백퍼버를 지운다.
+    float ClearColor[4] = { 1.0f, 1.0f, 1.0f, 1.0f }; //red,green,blue,alpha
+    m_pImmediateContext->ClearRenderTargetView(m_pRenderTargetView, ClearColor);
+    m_pImmediateContext->PSSetSamplers(0, 1, &KDxState::m_pSamplerState);
+    m_GameTimer.Render();
+    I_INPUT.Render();
     Render();
+   // m_dwWrite.Render();
+    m_pSwapChain->Present(0,0);
+ 
+
+    m_pSwapChain->Present(0, 0);
+    
     return true;
 }
 bool	KCore::GameRelease()
 {
     Release();
-    return true;
-}
-
-bool	KCore::Init()
-{
-    CreateDevice();
-    return true;
-}
-bool	KCore::Frame() {
-
-
-    return true;
-}
-bool	KCore::Render() {
-
-        // 백퍼버를 지운다.
-        float ClearColor[4] = { 0.0f, 0.6f, 0.0f, 1.0f }; //red,green,blue,alpha
-        m_pImmediateContext->ClearRenderTargetView(m_pRenderTargetView, ClearColor);
-        m_pSwapChain->Present(0, 0);
-        return true;
-
-}
-bool	KCore::Release() {
     CleanUpDevice();
+    KDxState::Release();
+    m_dwWrite.Release();
+    m_GameTimer.Release();
+    I_INPUT.Release();
+
+
     return true;
-}
-void KCore::ResizeDevice(UINT iWidth, UINT iHeight)
-{
 }
 bool KCore::Run()
 {
@@ -91,4 +88,26 @@ bool KCore::Run()
     }
     GameRelease();
     return true;
+}
+
+void KCore::ResizeDevice(UINT iWidth, UINT iHeight)
+{
+    if (m_pd3dDevice == nullptr) return;
+    DeleteResizeDevice(iWidth, iHeight);
+
+    m_dwWrite.DeleteDeviceResize();
+
+    KDevice::ResizeDevice(iWidth, iHeight);
+
+    IDXGISurface1* pSurface = nullptr;
+    HRESULT hr = m_pSwapChain->GetBuffer(0,
+        __uuidof(IDXGISurface1),
+        (void**)&pSurface);
+    if (SUCCEEDED(hr))
+    {
+        m_dwWrite.SetRenderTarget(pSurface);
+    }
+    if (pSurface) pSurface->Release();
+
+    CreateResizeDevice(iWidth, iHeight);
 }

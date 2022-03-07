@@ -1,7 +1,7 @@
 #include "KWorld.h"
 KWorld* KWorld::m_pWorld = nullptr;
 
-bool KWorld::Load(std::wstreambuf saveFile)
+bool KWorld::Load(std::wstring saveFile)
 {
     return false;
 }

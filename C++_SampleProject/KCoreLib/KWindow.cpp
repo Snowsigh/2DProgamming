@@ -25,11 +25,20 @@ LRESULT  KWindow::MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     return 0;
 }
+void KWindow::ResizeDevice(UINT iWidth, UINT iHeight)
+{
+}
 LRESULT  KWindow::WndMsgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     if (MsgProc(hWnd, message, wParam, lParam)) return 1;
     switch (message)
     {
+    case WM_SIZE:
+    {
+        UINT iWidth = LOWORD(lParam);
+        UINT iHeight = HIWORD(lParam);
+        g_pWindow->ResizeDevice(iWidth, iHeight);
+    }break;
     case WM_DESTROY:
         PostQuitMessage(0);
         break;

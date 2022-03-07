@@ -1,5 +1,7 @@
 #pragma once
-#include "KStd.h"
+#include "KShaderMgr.h"
+#include "KTextureMgr.h"
+#include "KDxState.h"
 #include <d3dcompiler.h>
 #include <DDSTextureLoader.h>
 #include <WICTextureLoader.h>
@@ -52,11 +54,17 @@ public:
 	DWORD		m_dwCollisonType;
 	DWORD		m_dwSelectType;
 	DWORD		m_dwSelectState;
+	DWORD		m_dwPreSelectState;
 	bool		m_bSelect;
 	bool		m_bAlphaBlend = true;
 public:
 	virtual void	HitOverlap(KBaseObject* pObj, DWORD dwState);
 	virtual void	HitSelect(KBaseObject* pObj, DWORD dwState);
+	virtual void	SetCollisionType(DWORD dwCollisionType, DWORD dwSelectType)
+	{
+		m_dwCollisonType = dwCollisionType;
+		m_dwSelectType = dwSelectType;
+	}
 public:
 
 	KBaseObject()
@@ -72,15 +80,27 @@ public:
 		m_dwSelectType = KCollisionType::Overlap;
 	}
 };
+struct KIndex
+{
+	DWORD _0;
+	DWORD _1;
+	DWORD _2;
+};
+
+struct KConstantData
+{
+	KVector4 Color;
+	KVector4 Timer;
+};
+
 class KDxObject : public KBaseObject
 {
 public:
-
+	KTexture* m_pColorTex = nullptr;
+	KTexture* m_pMaskTex = nullptr;
+	KShader* m_pVShader = nullptr;
+	KShader* m_pPShader = nullptr;
 public:
-	ID3D11ShaderResourceView* m_pSRV0;
-	ID3D11Texture2D* m_pTexture0;
-	ID3D11ShaderResourceView* m_pSRV1;
-	ID3D11Texture2D* m_pTexture1;
 	ID3D11BlendState* m_AlphaBlend;
 	ID3D11BlendState* m_AlphaBlendDisable;
 	D3D11_TEXTURE2D_DESC		m_TextureDesc;
@@ -88,27 +108,35 @@ public:
 	std::vector<SimpleVertex> m_InitScreenList;
 	std::vector<SimpleVertex> m_VertexList;
 	ID3D11Buffer* m_pVertexBuffer;
-	ID3D11InputLayout* m_pVertexLayout;
-	ID3D11VertexShader* m_pVertexShader;
-	ID3D11PixelShader* m_pPixelShader;
 
+	std::vector<DWORD> m_IndexList;
+	ID3D11Buffer* m_pIndexBuffer;
+
+	KConstantData    m_ConstantList;
+	ID3D11Buffer* m_pConstantBuffer;
+
+	ID3D11InputLayout* m_pVertexLayout;
 	ID3D11Device* m_pd3dDevice;
 	ID3D11DeviceContext* m_pContext;
-
-	ID3DBlob* m_pVSCodeResult = nullptr;
-	ID3DBlob* m_pErrorMsgs = nullptr;
-	ID3DBlob* m_pPSCodeResult = nullptr;
 public:
-
 	void    SetDevice(ID3D11Device* m_pd3dDevice,
 		ID3D11DeviceContext* m_pContext);
 	virtual bool    LoadTexture(const TCHAR* szColorFileName,
 		const TCHAR* szMaskFileName);
 	virtual bool    SetVertexData();
+	virtual bool    SetIndexData();
+	virtual bool    SetConstantData();
 	virtual bool	Create(ID3D11Device* m_pd3dDevice,
 		ID3D11DeviceContext* m_pContext,
+		const TCHAR* szShaderFileName = nullptr,
 		const TCHAR* szTextureFileName = nullptr,
 		const TCHAR* szMaskFileName = nullptr);
+	virtual bool	CreateVertexBuffer();
+	virtual bool    CreateIndexBuffer();
+	virtual bool	CreateConstantBuffer();
+	virtual bool    CreateVertexShader(const TCHAR* szFile);
+	virtual bool    CreatePixelShader(const TCHAR* szFile);
+	virtual bool    CreateInputLayout();
 public:
 	virtual bool	Init();
 	virtual bool	Frame();

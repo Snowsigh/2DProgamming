@@ -75,6 +75,12 @@
     <ClInclude Include="KTextureMgr.h">
       <Filter>Manager</Filter>
     </ClInclude>
+    <ClInclude Include="KUIObject.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="KDxState.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KWindow.cpp">
@@ -124,6 +130,12 @@
     </ClCompile>
     <ClCompile Include="KTextureMgr.cpp">
       <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="KUIObject.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="KDxState.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

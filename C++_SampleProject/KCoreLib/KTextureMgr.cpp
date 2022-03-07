@@ -24,14 +24,14 @@ bool KTexture::Release()
 
 bool KTexture::Load(ID3D11Device* pd3dDevice, std::wstring filename)
 {
-	HRESULT hr = DirectX::CreateWICTextureFromFile(
+	HRESULT hr = DirectX::CreateDDSTextureFromFile(
 		pd3dDevice,
 		filename.c_str(),
 		(ID3D11Resource**)&m_pTexture,
 		&m_pSRV);
 	if (FAILED(hr))
 	{
-		hr = DirectX::CreateDDSTextureFromFile(
+		hr = DirectX::CreateWICTextureFromFile(
 			pd3dDevice,
 			filename.c_str(),
 			(ID3D11Resource**)&m_pTexture,

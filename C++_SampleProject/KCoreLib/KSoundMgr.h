@@ -1,7 +1,7 @@
 #pragma once
 #include "KStd.h"
-#include "Include/fmod.hpp"
-#include "Include/fmod_errors.h"
+#include "fmod.hpp"
+#include "fmod_errors.h"
 #pragma comment(lib,"fmod_vc.lib")
 class KSound
 {
@@ -11,6 +11,7 @@ public:
 	FMOD::System* m_pSystem = nullptr;
 	FMOD::Sound* m_pSound = nullptr;
 	FMOD::Channel* m_pChannel = nullptr;
+	
 	float			m_fVolume = 0.5f;
 	std::wstring	m_szMsg;
 	TCHAR			m_szBuffer[256];
@@ -46,9 +47,12 @@ public:
 	bool	Frame();
 	bool	Render();
 	bool	Release();
-private:
-	KSoundMgr();
+	
 public:
+	KSoundMgr()
+	{
+
+	}
 	~KSoundMgr();
 };
 

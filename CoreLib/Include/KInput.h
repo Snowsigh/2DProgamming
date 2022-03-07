@@ -1,14 +1,5 @@
 #pragma once
 #include "KStd.h"
-struct KInputState
-{
-	DWORD dwKeyW;
-	DWORD dwKeyA;
-	DWORD dwKeyS;
-	DWORD dwKeyD;
-	DWORD dwKeySP;
-};
-
 enum KeyState
 {
 	KEY_FREE = 0,
@@ -36,3 +27,4 @@ public:
 	DWORD   GetKey(DWORD dwKey);
 };
 
+#define I_INPUT KInput::Get()
