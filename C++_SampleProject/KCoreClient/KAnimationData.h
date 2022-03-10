@@ -15,7 +15,7 @@ public:
 		{
 			if (_MaxFrame > 9)
 			{
-				if (i < 10)
+				if (i < 9)
 				{
 					std::wstring name = _FileName;
 					name += L"0";
@@ -55,24 +55,38 @@ public:
 };
 class KAnimationData 
 {
-public:
+private:
 	int m_iMaxClip;
-	KAnimationClip* IDleClip;
-	KAnimationClip* RunClip;
-	KAnimationClip* TurnClip;
-	KAnimationClip* JumpClip;
-	KAnimationClip* ShootClip;
-	KAnimationClip* RunShootClip;
-	KAnimationClip* DashClip;
+	KAnimationClip* m_pClip;
 	KAnimationClip** m_pClipBuffer;
 public:
-	KAnimationData()
+	KAnimationData(int _MaxClip) : m_iMaxClip(_MaxClip)
 	{
-
+		m_pClip = nullptr;
+		m_pClipBuffer = new KAnimationClip*[m_iMaxClip];
 	}
 	~KAnimationData()
 	{
-
+		for (int i = m_iMaxClip - 1; i >= 0; i--)
+		{
+			if (m_pClipBuffer[i]) { delete m_pClipBuffer[i]; m_pClipBuffer[i] = nullptr; }
+			if (m_pClipBuffer) { delete m_pClipBuffer; m_pClipBuffer = nullptr; }
+		}
+	}
+	bool AddClip(int _iClipNumber, KAnimationClip* _Clip)
+	{
+		if (_iClipNumber >= m_iMaxClip) return false;
+		m_pClipBuffer[_iClipNumber] = _Clip;
+		return true;
+	}
+	KAnimationClip*	GetClip(int _Num)
+	{
+		if (_Num >= m_iMaxClip) return nullptr;
+		return m_pClipBuffer[_Num];
+	}
+	int GetClipMax()
+	{
+		return m_iMaxClip;
 	}
 
 };
@@ -85,11 +99,39 @@ private:
 	KTexture* m_pTex;
 	int m_iFrame;
 
-
+public:
+	KAnimation(KAnimationData* _Data)
+	{
+		m_AniData = _Data;
+		m_pClip = m_AniData->GetClip(0);
+		m_pTex = m_AniData->GetClip(0)->GetTex(0);
+		m_iFrame = 0;
+		
+	}
+	~KAnimation()
+	{
+		if (m_AniData) { delete m_AniData; m_AniData = nullptr; }
+	}
+	bool ChangeClip(int _iClip)
+	{
+		if (_iClip > m_AniData->GetClipMax() - 1) return false;
+		m_pClip = m_AniData->GetClip(_iClip);
+		m_iFrame = 0;
+		return true;
+	}
 	void UpdataFrame()
 	{
 		m_iFrame = (m_iFrame + 1) % m_pClip->GetFrameMAX();
 		m_pTex = m_pClip->GetTex(m_iFrame);
+	}
+
+	KAnimationClip*	GetClip()
+	{
+		return m_pClip;
+	}
+	KAnimationData* GetData()
+	{
+		return m_AniData;
 	}
 };
 

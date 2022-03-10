@@ -58,21 +58,7 @@ bool KGameWorld::CreateModelType()
 /// </summary>
 /// <param name="file"></param>
 /// <returns></returns>
-	{
-			PlayerObj.Init();
-			PlayerObj.SetRectDraw({ 0,0, 98 , 155 });
-			PlayerObj.SetRectSouce({ 0,0,98,155 });
-			PlayerObj.SetPosition(KVector2((200), (500)));
-			PlayerObj.m_pColorTex = PlayerObj.PlayerAnimation.IDleClip->GetTex(0);
-			PlayerObj.m_pMaskTex = nullptr;
-			PlayerObj.m_pVShader = pVShader;
-			PlayerObj.m_pPShader = pPShader;
-			if (!PlayerObj.Create(m_pd3dDevice, m_pContext))
-			{
-				return false;
-			}
-			PlayerObj.SetCollisionType(KCollisionType::Ignore, KSelectType::Select_Overlap);
-	}
+	PlayerObj.CreatePlayer(pVShader, pPShader,m_pd3dDevice,m_pContext);
 
 
 	/// <summary>
@@ -133,9 +119,6 @@ bool KGameWorld::CreateModelType()
 bool KGameWorld::Load(std::wstring file)
 {
 	m_pBG = I_Texture.Load(L"../../Data/Stage/Stage1_Stage.png");
-
-	PlayerObj.ActionTexInit();
-
 	CreateModelType();
 	return true;
 }

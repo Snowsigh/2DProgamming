@@ -4,16 +4,17 @@
 class KPlayerObject2D : public KObject2D
 {
 public:
-	KAnimationData PlayerAnimation;
+	KAnimation* PlayerAnimation;
 	
 public:
+	bool CreatePlayer(KShader* _VS, KShader* _PS, ID3D11Device* _Device, ID3D11DeviceContext* _Context);
 	bool ActionTexInit();
 	virtual void HitOverlap(KBaseObject* pObj, DWORD dwState);
 	bool Frame() override;
 	bool Render() override;
+	bool Shoot();
+	bool Release();
 public:
 	KPlayerObject2D();
 	~KPlayerObject2D();
 };
-
-#define TEXCHACK(A) pTex=PlayerAnimation.A->GetTex(PlayerAnimation.A->GetFrameMAX()-1);
