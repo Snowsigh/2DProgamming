@@ -1,10 +1,12 @@
 #pragma once
 #include "KGameWorld.h"
+#include "KPlayerObject2D.h"
 #include <KCore.h>
 
 class KSample : public KCore
 {
 public:
+	KPlayerObject2D PlayerObj;
 	KGameWorld m_GameWorld;
 
 

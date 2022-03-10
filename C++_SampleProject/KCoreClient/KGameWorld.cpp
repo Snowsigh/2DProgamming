@@ -63,13 +63,11 @@ bool KGameWorld::CreateModelType()
 			PlayerObj.SetRectDraw({ 0,0, 98 , 155 });
 			PlayerObj.SetRectSouce({ 0,0,98,155 });
 			PlayerObj.SetPosition(KVector2((200), (500)));
-			PlayerObj.m_pColorTex = nullptr;
+			PlayerObj.m_pColorTex = PlayerObj.PlayerAnimation.IDleClip->GetTex(0);
 			PlayerObj.m_pMaskTex = nullptr;
 			PlayerObj.m_pVShader = pVShader;
 			PlayerObj.m_pPShader = pPShader;
-			if (!PlayerObj.Create(m_pd3dDevice, m_pContext,
-				nullptr,
-				L"../../Data/Cuphead/Idle/cuphead_idle_0001.png"))
+			if (!PlayerObj.Create(m_pd3dDevice, m_pContext))
 			{
 				return false;
 			}
@@ -137,6 +135,7 @@ bool KGameWorld::Load(std::wstring file)
 	m_pBG = I_Texture.Load(L"../../Data/Stage/Stage1_Stage.png");
 
 	PlayerObj.ActionTexInit();
+
 	CreateModelType();
 	return true;
 }
@@ -186,8 +185,9 @@ bool KGameWorld::Frame()
 	{
 
 	}
-	PlayerObj.Frame();
 	KWorld::Frame();
+	PlayerObj.Frame();
+	
 
 	return true;
 	

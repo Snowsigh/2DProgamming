@@ -230,8 +230,8 @@ bool KDxObject::Create(ID3D11Device* pd3dDevice,
 	// 혼합상태 = 픽셀쉐이더 출력 컬러  (연산:사칙연산) 출력버퍼의 컬러
 	D3D11_BLEND_DESC  blenddesc;
 	ZeroMemory(&blenddesc, sizeof(D3D11_BLEND_DESC));
-	/*bd.AlphaToCoverageEnable;
-	bd.IndependentBlendEnable;*/
+	blenddesc.AlphaToCoverageEnable = true;
+	//bd.IndependentBlendEnable;
 	blenddesc.RenderTarget[0].BlendEnable = TRUE;
 	blenddesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
 	blenddesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
@@ -307,7 +307,7 @@ bool KDxObject::Render()
 	if (m_IndexList.size() <= 0)
 		m_pContext->Draw(m_VertexList.size(), 0);
 	else
-		m_pContext->DrawIndexed(m_IndexList.size(), 0, 0);
+		m_pContext->DrawIndexed(m_IndexList.size(), 0, 0); 
 	return true;
 }
 

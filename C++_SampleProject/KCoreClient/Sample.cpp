@@ -11,6 +11,7 @@ void	KSample::DeleteResizeDevice(UINT iWidth, UINT iHeight)
 }
 bool	KSample::Init()
 {
+
 	I_Sound.Init();
 
 	m_GameWorld.Init();
