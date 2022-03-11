@@ -13,7 +13,7 @@ public:
 public:
 	static KWorld* m_pWorld;
 	std::map<std::wstring, KObject2D*> m_UIobj;
-	std::map<std::wstring, KObject2D*> m_Itemobj;
+	std::map<std::wstring, KObject2D*> m_EtcObj;
 	std::map<std::wstring, KObject2D*> m_Npcobj;
 	std::map<std::wstring, KObject2D*> m_Mapobj;
 	using m_mapiter = std::map<std::wstring, KObject2D*>::iterator;

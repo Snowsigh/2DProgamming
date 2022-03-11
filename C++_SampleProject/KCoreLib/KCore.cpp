@@ -57,9 +57,6 @@ bool	KCore::GameRender()
     Render();
    // m_dwWrite.Render();
     m_pSwapChain->Present(0,0);
- 
-
-    m_pSwapChain->Present(0, 0);
     
     return true;
 }

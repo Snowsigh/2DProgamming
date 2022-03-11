@@ -98,6 +98,9 @@ private:
 	KAnimationClip* m_pClip;
 	KTexture* m_pTex;
 	int m_iFrame;
+public:
+	bool m_bMaxFrame = false;
+	bool m_bCliplock = false;
 
 public:
 	KAnimation(KAnimationData* _Data)
@@ -121,17 +124,52 @@ public:
 	}
 	void UpdataFrame()
 	{
-		m_iFrame = (m_iFrame + 1) % m_pClip->GetFrameMAX();
+		
+		if (m_pClip == m_AniData->GetClip(0) )
+		{
+			if (!m_bMaxFrame)
+			{
+
+				if (m_iFrame == m_pClip->GetFrameMAX() - 1)
+				{
+					m_bMaxFrame = true;
+				}
+				else
+				{
+					m_iFrame += 1;
+				}
+			}
+			else
+			{
+				if (m_iFrame == 0)
+				{
+					m_bMaxFrame = false;
+				}
+				else
+				{
+					m_iFrame -= 1;
+				}
+			}
+		}
+		else
+		{
+			m_iFrame = (m_iFrame + 1) % m_pClip->GetFrameMAX();
+			if (m_iFrame == (m_pClip->GetFrameMAX() - 1)) m_bCliplock = false;
+		}
 		m_pTex = m_pClip->GetTex(m_iFrame);
 	}
 
-	KAnimationClip*	GetClip()
+	KTexture*	GetTex()
 	{
-		return m_pClip;
+		return m_pTex;
 	}
 	KAnimationData* GetData()
 	{
 		return m_AniData;
+	}
+	KAnimationClip* GetClip()
+	{
+		return m_pClip;
 	}
 };
 

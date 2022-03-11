@@ -6,6 +6,9 @@ bool KGameWorld::CreateModelType()
 {
 	KShader* pVShader = I_Shader.CreateVertexShader(m_pd3dDevice, L"Shader.txt", "VS");
 	KShader* pPShader = I_Shader.CreatePixelShader(m_pd3dDevice, L"Shader.txt", "PSAlphaBlend");
+	
+	
+
 /// <summary>
 /// 배경이미지
 /// </summary>
@@ -29,37 +32,51 @@ bool KGameWorld::CreateModelType()
 		obj->SetCollisionType(KCollisionType::Ignore, KSelectType::Select_Ignore);
 		m_UIobj.insert(std::make_pair(L"bk", obj));
 	}
+	
+	
 /// <summary>
-/// 배경 오브젝트
+///  오브젝트
 /// </summary>
 /// <param name="file"></param>
 /// <returns></returns>
 	{
-		KImageObject* bks = new KImageObject;
+		KEtcObject* bks = new KEtcObject;
 		bks->Init();
-		bks->m_rtOffset = { 0, 0, 50, 50 };
 		bks->SetRectDraw({ 0,0, 500 , 150 });
 		bks->SetPosition(KVector2((400), (g_rtClient.bottom - 100)));
 		bks->m_pColorTex = nullptr;
 		bks->m_pMaskTex = nullptr;
 		bks->m_pVShader = pVShader;
 		bks->m_pPShader = pPShader;
-		if (!bks->Create(m_pd3dDevice, m_pContext,
-			nullptr,
-			L"../../Data/Stage/Stage1_Dust.png"))
+		if (!bks->Create(m_pd3dDevice, m_pContext
+						,nullptr, L"../../Data/Stage/Stage1_Dust.png"))
 		{
 			return false;
 		}
 		bks->SetCollisionType(KCollisionType::Ignore, KSelectType::Select_Overlap);
-		m_UIobj.insert(std::make_pair(L"bk_Shadow", bks));
+		m_EtcObj.insert(std::make_pair(L"Dust", bks));
 	}
 /// <summary>
 /// 플레이어 캐릭터
 /// </summary>
 /// <param name="file"></param>
 /// <returns></returns>
-	PlayerObj.CreatePlayer(pVShader, pPShader,m_pd3dDevice,m_pContext);
 
+	PlayerObj.SetRectDraw({ 0,0, 150 , 155 });
+	PlayerObj.SetPosition(KVector2((200), (500)));
+	PlayerObj.m_pColorTex = PlayerObj.PlayerAnimation->GetTex();
+	PlayerObj.m_pMaskTex = nullptr;
+	PlayerObj.m_pVShader = nullptr;
+	PlayerObj.m_pPShader = nullptr;
+	if (!PlayerObj.Create(m_pd3dDevice, m_pContext,L"PlayerShader.txt"))
+	{
+		return false;
+	}
+
+	PlayerObj.SetCollisionType(KCollisionType::Ignore, KSelectType::Select_Overlap);
+
+	return true;
+	
 
 	/// <summary>
 	/// 버튼
@@ -119,6 +136,7 @@ bool KGameWorld::CreateModelType()
 bool KGameWorld::Load(std::wstring file)
 {
 	m_pBG = I_Texture.Load(L"../../Data/Stage/Stage1_Stage.png");
+	PlayerObj.ActionTexInit();
 	CreateModelType();
 	return true;
 }
@@ -126,6 +144,7 @@ bool KGameWorld::Load(std::wstring file)
 bool KGameWorld::Init()
 {
 	KWorld::Init();
+	PlayerObj.Init();
 	return false;
 }
 
@@ -178,7 +197,6 @@ bool KGameWorld::Frame()
 
 bool KGameWorld::Render()
 {
-	
 	KWorld::Render();
 	PlayerObj.Render();
 	return false;

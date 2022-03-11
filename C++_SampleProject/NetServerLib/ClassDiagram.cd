@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="KAcceptor" Collapsed="true">
+  <Class Name="KAcceptor">
     <Position X="1" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAIAgAAABACAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
@@ -8,9 +8,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="KNetUser">
-    <Position X="5.5" Y="4.25" Width="1.5" />
+    <Position X="6.75" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgAEQIlAAAAQCAAgAQoAAAIAMAACAAAFAAAEAgEAgA=</HashCode>
+      <HashCode>AAAAEQIlAAAAAAAAgAQIAAAIAMAACAAAFAAAEAgEAgA=</HashCode>
       <FileName>KNetUser.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -28,15 +28,27 @@
       <FileName>KPacket.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="KServer" Collapsed="true">
-    <Position X="3" Y="2.25" Width="1.5" />
+  <Class Name="KServer">
+    <Position X="4" Y="2.25" Width="1.5" />
+    <NestedTypes>
+      <Typedef Name="KServer::m_UserIter" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>KServer.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="KServer::FuncionIterator" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>KServer.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAEAAAADBCgAAAAAAAAAAAAABACAAAgAIACAhAEAAI=</HashCode>
+      <HashCode>AAAEAAAADACgAAAAAAAAAAAAABACAAAgAIACAhAEAAI=</HashCode>
       <FileName>KServer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="KServerObject">
-    <Position X="3.25" Y="4.25" Width="1.5" />
+    <Position X="6.75" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AABAAAAAAAAAAAAAAAAAAAAAAEAIAABAAAAAAAAAAAA=</HashCode>
       <FileName>KServerObject.h</FileName>
@@ -56,8 +68,8 @@
       <FileName>KStd.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="KThread">
-    <Position X="1.25" Y="4.25" Width="1.5" />
+  <Class Name="KThread" Collapsed="true">
+    <Position X="2.25" Y="1" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EABAAQAACAAAAgoAAAAAAAAAAAAAAQAAAAIAAACAAAI=</HashCode>
       <FileName>KThread.h</FileName>

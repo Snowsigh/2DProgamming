@@ -60,29 +60,6 @@ bool KServer::SendMsg(KNetUser* pUser, UPACKET& packet)
 	pUser->SendMsg(packet);
 	return true;
 }
-
-int KServer::BroadcastUserPacketPool(KNetUser* user)
-{
-	if (user->m_pPacketPool.size() > 0)
-	{
-		std::list<KPacket>::iterator iter;
-		for (iter = user->m_pPacketPool.begin();
-			iter != user->m_pPacketPool.end(); )
-		{
-			for (KNetUser* senduser : m_UserList)
-			{
-				int iRet = SendMsg(senduser->m_Sock, (*iter).m_uPacket);
-				if (iRet <= 0)
-				{
-					senduser->m_bConnect = false;
-				}
-			}
-			iter = user->m_pPacketPool.erase(iter);
-		}
-	}
-	return 1;
-}
-
 bool KServer::AddUser(SOCKET sock, SOCKADDR_IN clientAddr)
 {
 	return true;

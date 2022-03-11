@@ -40,7 +40,9 @@ void KObject2D::AddPosition(KVector2 vPos)
 	//
 	//   h
 	m_rtCollision = KRect(m_vPos, m_fWidth, m_fHeight);
+	
 	ConvertIndex(m_vPos, m_fWidth, m_fHeight, m_VertexList);
+	
 	m_pContext->UpdateSubresource(
 		m_pVertexBuffer, 0, NULL, &m_VertexList.at(0), 0, 0);
 }
@@ -177,6 +179,7 @@ bool KObject2D::SetIndexData()
 
 bool KObject2D::Frame()
 {
+
 	if (m_bFadeIn)	FadeIn();
 	if (m_bFadeOut)	FadeOut();
 	m_ConstantList.Color = m_vColor;
@@ -185,7 +188,20 @@ bool KObject2D::Frame()
 		0,
 		0,
 		1.0f);
-	m_pContext->UpdateSubresource(
-		m_pConstantBuffer, 0, NULL, &m_ConstantList, 0, 0);
+	m_pContext->UpdateSubresource(m_pConstantBuffer, 0, NULL, &m_ConstantList, 0, 0);
 	return true;
+}
+
+KObject2D::KObject2D()
+{
+	m_fAlpha = 1.0f;
+	m_vColor = KVector4(1, 1, 1, 1);
+	m_rtSource.left = 0; m_rtSource.right = 0;
+	m_rtSource.top = 0; m_rtSource.bottom = 0;
+	m_rtDraw.left = 0; m_rtDraw.right = g_rtClient.right;
+	m_rtDraw.top = 0; m_rtDraw.bottom = g_rtClient.bottom;
+}
+
+KObject2D::~KObject2D()
+{
 }

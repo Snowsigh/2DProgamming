@@ -18,7 +18,7 @@ public:
 	KPacket& operator << (std::string data);
 public:
 	KPacket& operator >> (int& data);
-	KPacket& operator >> (long& data);
+	KPacket& operator >> (long& data); 
 	KPacket& operator >> (short& data);
 	KPacket& operator >> (float& data);
 	KPacket& operator >> (char* data);

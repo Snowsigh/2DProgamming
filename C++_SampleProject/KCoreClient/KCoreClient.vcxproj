@@ -147,12 +147,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="KAnimationData.h" />
+    <ClInclude Include="KEtcObject.h" />
     <ClInclude Include="KGameWorld.h" />
     <ClInclude Include="KPlayerObject2D.h" />
     <ClInclude Include="Sample.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KAnimationData.cpp" />
+    <ClCompile Include="KEtcObject.cpp" />
     <ClCompile Include="KGameWorld.cpp" />
     <ClCompile Include="KPlayerObject2D.cpp" />
     <ClCompile Include="Sample.cpp" />

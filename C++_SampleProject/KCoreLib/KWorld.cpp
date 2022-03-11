@@ -21,12 +21,27 @@ bool KWorld::Frame()
 			pObj->Frame();
 		}
 	}
+	for (auto obj : m_EtcObj)
+	{
+		KObject2D* pObj = obj.second;
+		if (pObj != nullptr)
+		{
+			pObj->Frame();
+		}
+	}
 	return true;
 }
 
 bool KWorld::Render()
 {
 	for (auto obj : m_UIobj)
+	{
+		KObject2D* pObj = obj.second;
+		if (pObj != nullptr)
+		{
+			pObj->Render();
+		}
+	}for (auto obj : m_EtcObj)
 	{
 		KObject2D* pObj = obj.second;
 		if (pObj != nullptr)
@@ -44,7 +59,7 @@ bool KWorld::Release()
 		obj.second->Release();
 		delete obj.second;
 	}
-	for (auto obj : m_Itemobj)
+	for (auto obj : m_EtcObj)
 	{
 		obj.second->Release();
 		delete obj.second;
@@ -60,7 +75,7 @@ bool KWorld::Release()
 		delete obj.second;
 	}
 	m_UIobj.clear();
-	m_Itemobj.clear();
+	m_EtcObj.clear();
 	m_Npcobj.clear();
 	m_Mapobj.clear();
 	return true;

@@ -29,7 +29,6 @@ public:
 	int SendMsg(SOCKET sock, UPACKET& packet);
 	bool SendMsg(KNetUser* pUser, WORD type, char* data, int iSize);
 	bool SendMsg(KNetUser* pUser, UPACKET& packet);
-	int BroadcastUserPacketPool(KNetUser* user);
 	int Broadcast(KPacket& t);
 	virtual void LoginReq(KPacket& t, KNetUser* user);
 public:

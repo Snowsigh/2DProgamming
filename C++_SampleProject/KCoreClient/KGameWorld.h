@@ -4,6 +4,7 @@
 #include <KShaderMgr.h>
 #include <KUIObject.h>
 #include "KPlayerObject2D.h"
+#include "KEtcObject.h"
 class KGameWorld : public KWorld
 {
 public:

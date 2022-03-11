@@ -23,12 +23,12 @@ VS_OUTPUT VS(float2 p: POSITION, float2 t : TEXCOORD)
 	float fScaleY = sin(TimerX)*0.5f+0.5f;
 	pOut.p = float4(p.x,p.y,0.0f,1.0f);
 	pOut.t = t;
-	pOut.c = float4(1.0f,1.0f,1.0f,1.0f);
+	pOut.c = Color0;
 	return pOut;
 }
 Texture2D		g_txColor : register(t0);
 Texture2D		g_txMask : register(t1);
-SamplerState	g_Sample : register(s0);
+SamplerState		g_Sample : register(s0);
 
 float4 PS(VS_OUTPUT input) : SV_TARGET
 {	
@@ -39,13 +39,13 @@ float4 PS(VS_OUTPUT input) : SV_TARGET
 	// 소스알파(1) = 마스크이미지의 검정색부분은 불투명된다.
 	// 소스알파(0) = 마스크이미지의 흰색부분은   투명된다.
 	final = final * input.c;
-	final.a = 1.0f-mask.r;	
+	//final.a = 1.0f-mask.r;	
 	return final;
 }
 
 float4 PSAlphaBlend(VS_OUTPUT input) : SV_TARGET
 {	
-	float4 color = g_txColor.Sample(g_Sample, input.t);		
+	float4 color = g_txColor.Sample(g_Sample ,input.t);		
 	float4 final = color * input.c;
 	final.a = color.a;
 	return final;

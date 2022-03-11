@@ -7,7 +7,7 @@ public:
 	RECT				m_rtDraw;
 	KVector4			m_vColor;
 public:
-	float  m_fAlpha = 0.0f;
+	float  m_fAlpha = 1.0f;
 	bool   m_bFadeIn = false;
 	bool   m_bFadeOut = false;
 	virtual void    FadeIn();
@@ -33,5 +33,7 @@ public:
 	virtual bool		SetVertexData() override;
 	virtual bool		SetIndexData() override;
 	virtual bool		Frame() override;
+	KObject2D();
+  virtual	~KObject2D();
 };
 

@@ -38,9 +38,9 @@ bool KDxObject::SetIndexData()
 bool KDxObject::SetConstantData()
 {
 	ZeroMemory(&m_ConstantList, sizeof(KConstantData));
-	m_ConstantList.Color.x = 0.0f;
+	m_ConstantList.Color.x = 1.0f;
 	m_ConstantList.Color.y = 1.0f;
-	m_ConstantList.Color.z = 0.0f;
+	m_ConstantList.Color.z = 1.0f;
 	m_ConstantList.Color.w = 1.0f;
 	m_ConstantList.Timer.x = 0.0f;
 	m_ConstantList.Timer.y = 1.0f;
@@ -262,6 +262,7 @@ bool KDxObject::Frame()
 
 bool KDxObject::Render()
 {
+	
 	if (m_pColorTex != nullptr)
 		m_pContext->PSSetShaderResources(0, 1, &m_pColorTex->m_pSRV);
 	if (m_pMaskTex != nullptr)
