@@ -149,6 +149,7 @@
     <ClInclude Include="KAnimationData.h" />
     <ClInclude Include="KEtcObject.h" />
     <ClInclude Include="KGameWorld.h" />
+    <ClInclude Include="KNpcObject2D.h" />
     <ClInclude Include="KPlayerObject2D.h" />
     <ClInclude Include="Sample.h" />
   </ItemGroup>
@@ -156,6 +157,7 @@
     <ClCompile Include="KAnimationData.cpp" />
     <ClCompile Include="KEtcObject.cpp" />
     <ClCompile Include="KGameWorld.cpp" />
+    <ClCompile Include="KNpcObject2D.cpp" />
     <ClCompile Include="KPlayerObject2D.cpp" />
     <ClCompile Include="Sample.cpp" />
   </ItemGroup>

@@ -30,6 +30,9 @@
     <ClInclude Include="KEtcObject.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="KNpcObject2D.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sample.cpp">
@@ -45,6 +48,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="KEtcObject.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="KNpcObject2D.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

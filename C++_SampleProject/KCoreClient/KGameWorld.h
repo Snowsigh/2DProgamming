@@ -5,6 +5,7 @@
 #include <KUIObject.h>
 #include "KPlayerObject2D.h"
 #include "KEtcObject.h"
+#include "KNpcObject2D.h"
 class KGameWorld : public KWorld
 {
 public:
@@ -14,7 +15,7 @@ public:
 
 
 	KPlayerObject2D PlayerObj;
-
+	KNpcObject2D MonsterObj;
 
 public:
 	bool CreateModelType();

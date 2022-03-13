@@ -75,8 +75,24 @@ bool KGameWorld::CreateModelType()
 
 	PlayerObj.SetCollisionType(KCollisionType::Ignore, KSelectType::Select_Overlap);
 
-	return true;
+	/// <summary>
+	///  캐릭터
+	/// </summary>
+	/// <param name="file"></param>
+	/// <returns></returns>	
 	
+	MonsterObj.SetRectDraw({ 0,0, 250 , 300 });
+	MonsterObj.SetPosition(KVector2((800), (500)));
+	MonsterObj.m_pColorTex = MonsterObj.m_kAnimation->GetTex();
+	MonsterObj.m_pMaskTex = nullptr;
+	MonsterObj.m_pVShader = nullptr;
+	MonsterObj.m_pPShader = nullptr;
+	if (!MonsterObj.Create(m_pd3dDevice, m_pContext, L"PlayerShader.txt"))
+	{
+		return false;
+	}
+
+	MonsterObj.SetCollisionType(KCollisionType::Ignore, KSelectType::Select_Overlap);
 
 	/// <summary>
 	/// 버튼
@@ -137,7 +153,9 @@ bool KGameWorld::Load(std::wstring file)
 {
 	m_pBG = I_Texture.Load(L"../../Data/Stage/Stage1_Stage.png");
 	PlayerObj.ActionTexInit();
+	MonsterObj.ActionTexInit();
 	CreateModelType();
+	MonsterObj.Init();
 	return true;
 }
 
@@ -145,6 +163,7 @@ bool KGameWorld::Init()
 {
 	KWorld::Init();
 	PlayerObj.Init();
+	
 	return false;
 }
 
@@ -189,7 +208,7 @@ bool KGameWorld::Frame()
 	}
 	KWorld::Frame();
 	PlayerObj.Frame();
-	
+	MonsterObj.Frame();
 
 	return true;
 	
@@ -199,6 +218,7 @@ bool KGameWorld::Render()
 {
 	KWorld::Render();
 	PlayerObj.Render();
+	MonsterObj.Render();
 	return false;
 }
 
@@ -206,5 +226,6 @@ bool KGameWorld::Release()
 {
 	KWorld::Release();
 	PlayerObj.Release();
+	MonsterObj.Release();
 	return false;
 }
